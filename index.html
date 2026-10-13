@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VIALYS — Conectados con la vida, no con el celular | Seguridad Vial Juvenil</title>
-  <link rel="icon" type="image/png" href="logo.png">
-  <meta name="description" content="Iniciativa juvenil VIALYS: Concientización sobre la tecnodependencia y el peligro mortal del uso del celular al volante. Prueba nuestro simulador interactivo y calcula tus metros a ciegas.">
+  <title>SafeRoute — Conectados con la vida | Una iniciativa de Colectivo VIALYS</title>
+  <link rel="icon" type="image/jpeg" href="saferoute-logo.jpg">
+  <meta name="description" content="SafeRoute es la plataforma de concientización y educación vial juvenil desarrollada por el Colectivo VIALYS frente a la tecnodependencia y el peligro del celular al volante.">
   <meta name="theme-color" content="#090a0f">
 
   <!-- Tipografías Google Fonts -->
@@ -146,32 +146,34 @@
     }
 
     .brand-logo-img {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
       object-fit: cover;
       box-shadow: 0 0 16px var(--vialys-yellow-glow);
-      border: 2px solid rgba(255, 204, 0, 0.4);
+      border: 2px solid rgba(255, 204, 0, 0.45);
+      background: #000;
       transition: transform 0.3s ease;
     }
 
     .brand-link:hover .brand-logo-img {
-      transform: rotate(6deg) scale(1.05);
+      transform: rotate(4deg) scale(1.05);
     }
 
     .brand-text {
       display: flex;
       flex-direction: column;
+      line-height: 1.25;
     }
 
     .brand-title {
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 900;
-      letter-spacing: 1.5px;
+      letter-spacing: 0.5px;
       color: #ffffff;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 2px;
     }
 
     .brand-title span {
@@ -183,6 +185,24 @@
       color: var(--text-muted);
       font-weight: 500;
       letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .brand-company-badge {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 204, 0, 0.12);
+      color: var(--vialys-yellow);
+      border: 1px solid rgba(255, 204, 0, 0.35);
+      border-radius: 4px;
+      padding: 0 5px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
     }
 
     .nav-menu {
@@ -1277,6 +1297,39 @@
       flex-wrap: wrap;
     }
 
+    .about-logos-cluster {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .about-creator-pill {
+      font-family: var(--font-arcade);
+      font-size: 8px;
+      color: var(--vialys-yellow);
+      background: rgba(255, 204, 0, 0.1);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 204, 0, 0.25);
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+
+    .about-company-tag {
+      display: inline-block;
+      background: rgba(255, 204, 0, 0.15);
+      color: var(--vialys-yellow);
+      font-weight: 800;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 204, 0, 0.35);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
     .about-big-logo {
       width: 100px;
       height: 100px;
@@ -1299,6 +1352,21 @@
       font-weight: 700;
       letter-spacing: 0.5px;
       margin-top: 4px;
+    }
+
+    .pledge-partner-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 204, 0, 0.1);
+      border: 1px solid rgba(255, 204, 0, 0.3);
+      color: var(--vialys-yellow);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
     }
 
     .about-columns {
@@ -1554,10 +1622,13 @@
   <header class="navbar">
     <div class="nav-container">
       <a href="#inicio" class="brand-link">
-        <img src="logo.png" alt="Logo Colectivo VIALYS" class="brand-logo-img">
+        <img src="saferoute-logo.jpg" alt="Logo SafeRoute" class="brand-logo-img">
         <div class="brand-text">
-          <div class="brand-title">VIA<span>LYS</span></div>
-          <div class="brand-slogan">Conectados con la vida, no con el celular</div>
+          <div class="brand-title">Safe<span>Route</span></div>
+          <div class="brand-slogan">
+            <span class="brand-company-badge">Por Colectivo VIALYS</span>
+            <span>Conectados con la vida</span>
+          </div>
         </div>
       </a>
 
@@ -1596,14 +1667,15 @@
         <div class="hero-content">
           <div class="badge-pill">
             <span class="pulse-dot"></span>
-            Campaña de Concientización Vial Juvenil
+            SafeRoute • Campaña Oficial de Colectivo VIALYS
           </div>
           <h1 class="hero-title">
+            SafeRoute: <br>
             Conectados con la vida, <br>
             <span class="text-yellow">no con el celular.</span>
           </h1>
           <p class="hero-subtitle">
-            Un segundo para responder un mensaje. Toda una vida para lamentarlo. La tecnodependencia al volante es hoy una de las mayores causas de muerte en jóvenes. Antes de salir a la calle, descubre la ciencia detrás de la distracción y experimenta el peligro en nuestro simulador oficial.
+            SafeRoute es la plataforma interactiva de concientización y educación vial juvenil desarrollada por el <strong>Colectivo VIALYS</strong>. Un segundo para responder un mensaje, toda una vida para lamentarlo. Antes de salir a la calle, descubre la ciencia detrás de la distracción, pon a prueba tus reflejos y experimenta el peligro real en nuestro simulador oficial.
           </p>
           <div class="hero-actions">
             <a href="#simulador" class="btn btn-primary">
@@ -1615,7 +1687,7 @@
                 <line x1="15.2" y1="12" x2="21.5" y2="12"/>
                 <line x1="12" y1="15.2" x2="12" y2="21.5"/>
               </svg>
-              <span>Entrar al Simulador</span>
+              <span>Entrar al Simulador SafeRoute</span>
             </a>
             <a href="#calculadora" class="btn btn-secondary">
               <svg class="v-icon v-icon-md v-icon-yellow" viewBox="0 0 24 24"><path d="M12 14v4M3.34 19a10 10 0 1 1 17.32 0M9 9l3 3"/></svg>
@@ -2060,17 +2132,17 @@
           </svg>
           Experiencia Práctica
         </span>
-        <h2 class="section-title">Simulador Oficial VIALYS: Distracción Fatal</h2>
+        <h2 class="section-title">Simulador SafeRoute: Distracción Fatal</h2>
         <p class="section-desc">
-          Ponte al volante en un entorno seguro antes de salir a la vida real. Intenta mantener tu vehículo en el carril mientras te bombardean notificaciones continuas. ¿Podrás sobrevivir?
+          Tecnología y experiencia interactiva desarrollada por el <b>Colectivo VIALYS</b>. Ponte al volante en un entorno seguro antes de salir a la vida real. Intenta mantener tu vehículo en el carril mientras te bombardean notificaciones continuas. ¿Podrás sobrevivir?
         </p>
       </div>
 
       <div class="simulator-wrapper">
         <div class="sim-top-bar">
           <div class="sim-brand-title">
-            <img src="logo.png" style="width:28px;height:28px;border-radius:50%;" alt="VIALYS">
-            <span>CABINA DE SIMULACIÓN VIALYS</span>
+            <img src="saferoute-logo.jpg" style="width:28px;height:28px;border-radius:6px;object-fit:cover;" alt="SafeRoute">
+            <span>CABINA DE SIMULACIÓN SAFEROUTE • TECNOLOGÍA VIALYS</span>
           </div>
           <div class="sim-tools">
             <button class="sim-tool-btn" id="reloadGameBtn" title="Reiniciar partida">
@@ -2125,7 +2197,7 @@
 
           <!-- Cabina de juego embebida -->
           <div class="sim-cabinet-frame" id="simCabinet">
-            <iframe src="vialys.juego.html" class="game-iframe" id="gameFrame" title="Simulador VIALYS"></iframe>
+            <iframe src="vialys.juego.html" class="game-iframe" id="gameFrame" title="Simulador SafeRoute — VIALYS"></iframe>
           </div>
         </div>
       </div>
@@ -2137,10 +2209,14 @@
     <div class="container">
       <div class="about-card">
         <div class="about-header-flex">
-          <img src="logo.png" alt="Emblema Oficial VIALYS" class="about-big-logo">
+          <div class="about-logos-cluster">
+            <img src="logo.png" alt="Emblema Oficial Colectivo VIALYS" class="about-big-logo" title="Colectivo VIALYS">
+            <div class="about-creator-pill">CREADORES DE SAFEROUTE</div>
+          </div>
           <div>
+            <span class="about-company-tag">Empresa & Colectivo Creador</span>
             <h2 class="about-intro-title">Conoce al Colectivo VIALYS</h2>
-            <div class="about-slogan-tag">"Conectados con la vida, no con el celular"</div>
+            <div class="about-slogan-tag">"Conectados con la vida, no con el celular" — Los creadores de la iniciativa SafeRoute</div>
           </div>
         </div>
 
@@ -2150,10 +2226,10 @@
             <div class="pillar-box">
               <h4>
                 <svg class="v-icon v-icon-md v-icon-yellow" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                <span>Nuestra Misión</span>
+                <span>¿Quiénes somos y qué representa VIALYS?</span>
               </h4>
               <p>
-                VIALYS nació como un proyecto escolar y colectivo juvenil motivado por una realidad alarmante: la tecnología que debería comunicarnos se ha convertido en el arma más peligrosa al momento de conducir. Nuestro objetivo es crear conciencia interactiva y transformar los hábitos viales de nuestra generación.
+                <strong>VIALYS</strong> nació como un colectivo juvenil y proyecto empresarial estudiantil motivado por una realidad alarmante: la tecnología que debería comunicarnos se ha convertido en el arma más peligrosa al momento de conducir. Como empresa y equipo fundador, diseñamos y lanzamos la iniciativa <strong>SafeRoute</strong> para traducir la concientización en herramientas visuales, científicas e interactivas que conecten directamente con los jóvenes.
               </p>
             </div>
 
@@ -2165,15 +2241,20 @@
               <p>
                 • Activar el modo "No molestar al conducir" en iOS y Android antes de encender el motor.<br>
                 • Designar al copiloto como "Administrador de la Música y Mensajes".<br>
-                • Guardar el celular en la guantera o mochila fuera del alcance de la mano.
+                • Guardar el celular en la guantera o mochila fuera del alcance de la mano.<br>
+                • Difundir SafeRoute en escuelas, comunidades y redes para que más personas conozcan el trabajo de VIALYS.
               </p>
             </div>
           </div>
 
           <!-- Columna Compromiso Interactivo -->
           <div class="pledge-card">
-            <h3>Firma el Manifiesto VIALYS</h3>
-            <p>Genera tu credencial digital personalizada como Conductor Consciente y compártela para inspirar a otros.</p>
+            <div class="pledge-partner-tag">
+              <img src="saferoute-logo.jpg" style="width:18px;height:18px;border-radius:4px;object-fit:cover;" alt="SafeRoute">
+              <span>ALIANZA POR LA VIDA • VIALYS & SAFEROUTE</span>
+            </div>
+            <h3>Firma el Manifiesto SafeRoute & VIALYS</h3>
+            <p>Genera tu credencial digital personalizada como Conductor Consciente avalada por el Colectivo VIALYS.</p>
 
             <form class="pledge-form" id="pledgeForm" onsubmit="event.preventDefault(); generateBadge();">
               <input type="text" id="driverNameInput" class="pledge-input" placeholder="Escribe tu nombre completo..." required>
@@ -2184,15 +2265,17 @@
             </form>
 
             <div class="digital-badge" id="driverBadge">
-              <div style="display:flex;justify-content:center;margin-bottom:8px;">
-                <svg class="v-icon-xl v-icon-yellow" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              <div style="display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:10px;">
+                <img src="logo.png" style="width:32px;height:32px;border-radius:50%;border:1.5px solid var(--vialys-yellow);" alt="Colectivo VIALYS" title="Colectivo VIALYS">
+                <svg class="v-icon-lg v-icon-yellow" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <img src="saferoute-logo.jpg" style="width:32px;height:32px;border-radius:6px;border:1px solid rgba(255,204,0,0.5);" alt="SafeRoute" title="SafeRoute">
               </div>
               <div class="badge-status">Conductor Certificado Consciente</div>
               <div class="badge-driver-name" id="badgeName">TU NOMBRE</div>
               <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">
-                Se compromete a mantener el celular fuera de su vista mientras conduce para proteger vidas en el camino.
+                Se compromete a mantener el celular fuera de su vista mientras conduce para proteger vidas en el camino. Certificado avalado por SafeRoute y Colectivo VIALYS.
               </div>
-              <div style="font-family:var(--font-arcade);font-size:9px;color:var(--vialys-yellow);">FOLIO VIALYS #<span id="badgeFolio">0000</span></div>
+              <div style="font-family:var(--font-arcade);font-size:9px;color:var(--vialys-yellow);">FOLIO VIALYS / SAFEROUTE #<span id="badgeFolio">0000</span></div>
             </div>
           </div>
         </div>
@@ -2205,35 +2288,47 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="brand-title">VIA<span>LYS</span></div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <img src="saferoute-logo.jpg" alt="Logo SafeRoute" style="width:42px;height:42px;border-radius:10px;object-fit:cover;border:2px solid rgba(255,204,0,0.4);">
+            <div class="brand-title">Safe<span>Route</span></div>
+          </div>
           <p>
-            Iniciativa juvenil para la prevención de accidentes viales provocados por la tecnodependencia y el uso del teléfono móvil al volante. Salvar una vida comienza por soltar la pantalla.
+            SafeRoute es una plataforma integral de concientización y educación vial juvenil impulsada por el <strong>Colectivo VIALYS</strong>. Prevenir accidentes mortales causados por la tecnodependencia comienza por soltar la pantalla.
           </p>
+          <div style="margin-top:18px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.03);padding:10px 16px;border-radius:12px;border:1px solid rgba(255,204,0,0.25);max-width:400px;">
+            <img src="logo.png" alt="Emblema Colectivo VIALYS" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid var(--vialys-yellow);">
+            <div>
+              <div style="font-size:13px;font-weight:800;color:#fff;">Colectivo VIALYS</div>
+              <div style="font-size:11px;color:var(--text-muted);">Empresa y grupo creador de SafeRoute</div>
+            </div>
+          </div>
         </div>
 
         <div class="footer-col">
           <h5>Navegación</h5>
           <ul class="footer-links">
-            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#inicio">Inicio SafeRoute</a></li>
             <li><a href="#peligro">El Peligro del Celular</a></li>
             <li><a href="#calculadora">Calculadora a Ciegas</a></li>
             <li><a href="#reflejos">Test de Reflejos</a></li>
             <li><a href="#simulador">Simulador Oficial</a></li>
+            <li><a href="#nosotros">Conoce al Colectivo VIALYS</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h5>Recursos y Fuentes</h5>
+          <h5>Recursos y Enlaces</h5>
           <ul class="footer-links">
             <li><a href="https://www.who.int/es/news-room/fact-sheets/detail/road-traffic-injuries" target="_blank" rel="noopener">Organización Mundial de la Salud (OMS)</a></li>
             <li><a href="https://www.nsc.org/" target="_blank" rel="noopener">National Safety Council</a></li>
-            <li><a href="vialys.juego.html">Juego Directo (Full Screen)</a></li>
+            <li><a href="vialys.juego.html" target="_blank">Simulador en Pantalla Completa</a></li>
+            <li><a href="#nosotros">Sobre Colectivo VIALYS</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>© 2026 Colectivo <b>VIALYS</b>. Conectados con la vida, no con el celular. Todos los derechos reservados.</div>
+        <div>© 2026 <b>SafeRoute</b> — Desarrollado por <b>Colectivo VIALYS</b>. Conectados con la vida, no con el celular. Todos los derechos reservados.</div>
         <div>Ningún mensaje vale una vida humana.</div>
       </div>
     </div>

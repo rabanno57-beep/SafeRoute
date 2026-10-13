@@ -1,0 +1,2616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeRoute — Conectados con la vida | Una iniciativa de Colectivo VIALYS</title>
+  <link rel="icon" type="image/jpeg" href="saferoute-logo.jpg">
+  <meta name="description" content="SafeRoute es la plataforma de concientización y educación vial juvenil desarrollada por el Colectivo VIALYS frente a la tecnodependencia y el peligro del celular al volante.">
+  <meta name="theme-color" content="#090a0f">
+
+  <!-- Tipografías Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #08090d;
+      --bg-surface: #0f1118;
+      --bg-card: #151824;
+      --bg-card-hover: #1c2030;
+      --border-subtle: #232738;
+      --border-glow: rgba(255, 204, 0, 0.4);
+
+      --vialys-yellow: #ffcc00;
+      --vialys-yellow-glow: rgba(255, 204, 0, 0.25);
+      --vialys-amber: #f59e0b;
+      --vialys-red: #ff3b3b;
+      --vialys-green: #10b981;
+      --vialys-cyan: #06b6d4;
+
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-arcade: 'Press Start 2P', monospace;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-full: 9999px;
+
+      --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Fondo animado sutil con líneas de asfalto */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(circle at 50% 10%, rgba(255, 204, 0, 0.07), transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(255, 59, 59, 0.05), transparent 40%),
+        radial-gradient(circle at 15% 90%, rgba(16, 185, 129, 0.04), transparent 40%);
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    /* Malla de cuadrícula vial */
+    .road-grid-bg {
+      position: fixed;
+      inset: 0;
+      background-size: 60px 60px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* SISTEMA DE ICONOS VECTORIALES SVG */
+    .v-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+      width: 1.2em;
+      height: 1.2em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .v-icon-sm { width: 14px; height: 14px; }
+    .v-icon-md { width: 18px; height: 18px; }
+    .v-icon-lg { width: 26px; height: 26px; }
+    .v-icon-xl { width: 34px; height: 34px; }
+
+    .v-icon-yellow { stroke: var(--vialys-yellow); }
+    .v-icon-red { stroke: var(--vialys-red); }
+    .v-icon-green { stroke: var(--vialys-green); }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 9, 13, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-logo-img {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 0 16px var(--vialys-yellow-glow);
+      border: 2px solid rgba(255, 204, 0, 0.45);
+      background: #000;
+      transition: transform 0.3s ease;
+    }
+
+    .brand-link:hover .brand-logo-img {
+      transform: rotate(4deg) scale(1.05);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+    }
+
+    .brand-title {
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .brand-title span {
+      color: var(--vialys-yellow);
+    }
+
+    .brand-slogan {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .brand-company-badge {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 204, 0, 0.12);
+      color: var(--vialys-yellow);
+      border: 1px solid rgba(255, 204, 0, 0.35);
+      border-radius: 4px;
+      padding: 0 5px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-menu a:hover {
+      color: var(--vialys-yellow);
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--vialys-yellow), #e6b800);
+      color: #000 !important;
+      font-weight: 800 !important;
+      padding: 9px 18px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 14px rgba(255, 204, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+
+    /* CONTENEDOR GENERAL */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 90px 0;
+      position: relative;
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      padding: 70px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(255, 204, 0, 0.1);
+      border: 1px solid rgba(255, 204, 0, 0.3);
+      color: var(--vialys-yellow);
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .badge-pill .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--vialys-yellow);
+      box-shadow: 0 0 10px var(--vialys-yellow);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: 50px;
+      font-weight: 900;
+      line-height: 1.12;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .text-yellow {
+      color: var(--vialys-yellow);
+      text-shadow: 0 0 30px rgba(255, 204, 0, 0.35);
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 34px;
+      max-width: 580px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-main);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--vialys-yellow), #e6b800);
+      color: #0a0b0e;
+      box-shadow: 0 8px 24px rgba(255, 204, 0, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(255, 204, 0, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 204, 0, 0.4);
+      transform: translateY(-3px);
+    }
+
+    /* MOCKUP VISUAL INTERACTIVO */
+    .hero-visual-card {
+      position: relative;
+      background: linear-gradient(180deg, #131622 0%, #0c0e14 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+    }
+
+    .hero-visual-card::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--vialys-yellow), var(--vialys-red), transparent);
+    }
+
+    .phone-mockup {
+      background: #090b10;
+      border: 3px solid #232738;
+      border-radius: 28px;
+      padding: 16px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .phone-notch {
+      width: 100px;
+      height: 18px;
+      background: #151824;
+      border-radius: 0 0 12px 12px;
+      margin: -16px auto 14px;
+    }
+
+    .hero-dash-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #141724;
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .speed-tag {
+      color: var(--vialys-yellow);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .danger-alert-pill {
+      background: rgba(255, 59, 59, 0.2);
+      border: 1px solid var(--vialys-red);
+      color: #ff6b6b;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      animation: alertBlink 1s infinite alternate;
+    }
+
+    @keyframes alertBlink {
+      from { opacity: 0.6; }
+      to { opacity: 1; filter: drop-shadow(0 0 6px #ff3b3b); }
+    }
+
+    .simulated-notifs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .mock-notif {
+      background: #171b28;
+      border: 1px solid #282f44;
+      border-left: 4px solid var(--vialys-yellow);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      animation: floatNotif 3s ease-in-out infinite alternate;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .mock-notif:nth-child(2) {
+      border-left-color: #e1306c;
+      animation-delay: 1.5s;
+    }
+
+    .mock-notif:hover {
+      transform: scale(1.03);
+    }
+
+    @keyframes floatNotif {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-4px); }
+    }
+
+    .mock-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .mock-content {
+      flex: 1;
+    }
+
+    .mock-sender {
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .mock-time {
+      color: var(--text-dim);
+      font-size: 10px;
+    }
+
+    .mock-msg {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .attention-gauge {
+      background: #111420;
+      border: 1px solid #232738;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .gauge-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .gauge-bar-bg {
+      height: 12px;
+      background: #202436;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gauge-bar-fill {
+      height: 100%;
+      width: 18%;
+      background: linear-gradient(90deg, #ff3b3b, #ff7b2b);
+      box-shadow: 0 0 12px rgba(255, 59, 59, 0.7);
+      animation: attentionDrop 4s infinite alternate ease-in-out;
+    }
+
+    @keyframes attentionDrop {
+      0% { width: 85%; background: linear-gradient(90deg, #10b981, #ffcc00); }
+      40% { width: 50%; background: linear-gradient(90deg, #ffcc00, #f59e0b); }
+      100% { width: 14%; background: linear-gradient(90deg, #ff3b3b, #ff0000); }
+    }
+
+    .gauge-warning {
+      color: #ff4d4d;
+      font-size: 11px;
+      font-weight: 700;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* ESTADÍSTICAS EN CINTA */
+    .stats-ribbon {
+      background: #0d0f16;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 32px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 12px;
+    }
+
+    .stat-number {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--vialys-yellow);
+      line-height: 1.1;
+      margin-bottom: 4px;
+      text-shadow: 0 0 20px rgba(255, 204, 0, 0.25);
+    }
+
+    .stat-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .stat-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* SECCIÓN HEADERS */
+    .section-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 56px;
+    }
+
+    .section-tag {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--vialys-yellow);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-title {
+      font-size: 38px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    /* CARDS DE DISTRACCIÓN CUÁDRUPLE */
+    .distraction-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+
+    .distract-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 28px 22px;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .distract-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 204, 0, 0.5);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .distract-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: transparent;
+      transition: background 0.3s;
+    }
+
+    .distract-card:hover::before {
+      background: var(--vialys-yellow);
+    }
+
+    .distract-icon-wrap {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: rgba(255, 204, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 204, 0, 0.3);
+      font-size: 30px;
+      line-height: 1;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .distract-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .distract-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .distract-card .consequence {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border-subtle);
+      font-size: 12px;
+      font-weight: 700;
+      color: #ff6b6b;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* CALCULADORA INTERACTIVA */
+    .calculator-box {
+      background: linear-gradient(180deg, #121520 0%, #0c0e15 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .calc-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .calc-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .control-group label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .speed-badge, .dist-badge {
+      background: var(--vialys-yellow);
+      color: #000;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .speed-buttons-grid, .action-buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .action-buttons-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chip-btn {
+      background: #1a1e2d;
+      border: 1px solid #282f46;
+      color: var(--text-muted);
+      padding: 12px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .chip-btn:hover {
+      background: #22283d;
+      color: var(--text-main);
+      border-color: rgba(255, 204, 0, 0.4);
+    }
+
+    .chip-btn.active {
+      background: rgba(255, 204, 0, 0.15);
+      border-color: var(--vialys-yellow);
+      color: var(--vialys-yellow);
+      font-weight: 800;
+    }
+
+    .chip-btn .chip-sub {
+      font-size: 11px;
+      opacity: 0.75;
+    }
+
+    /* RESULTADO VISUAL CALCULADORA */
+    .calc-results-wrap {
+      background: #090a10;
+      border: 1px solid #232738;
+      border-radius: var(--radius-md);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+    }
+
+    .big-metric-center {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .blind-distance-val {
+      font-size: 64px;
+      font-weight: 900;
+      color: var(--vialys-red);
+      line-height: 1;
+      text-shadow: 0 0 25px rgba(255, 59, 59, 0.4);
+      letter-spacing: -1px;
+    }
+
+    .blind-distance-lbl {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 6px;
+    }
+
+    .road-track-sim {
+      height: 42px;
+      background: #191c28;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #2a2f44;
+      display: flex;
+      align-items: center;
+    }
+
+    .road-track-line {
+      position: absolute;
+      top: 50%;
+      left: 0; right: 0;
+      height: 2px;
+      border-top: 2px dashed rgba(255, 255, 255, 0.2);
+      transform: translateY(-50%);
+    }
+
+    .road-blind-fill {
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      width: 65%;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 59, 59, 0.4),
+        rgba(255, 59, 59, 0.4) 10px,
+        rgba(255, 0, 0, 0.6) 10px,
+        rgba(255, 0, 0, 0.6) 20px
+      );
+      transition: width 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .car-marker-svg {
+      width: 26px;
+      height: 14px;
+      position: absolute;
+      right: 2px;
+      filter: drop-shadow(0 0 4px #000);
+    }
+
+    .real-world-comparison {
+      background: #131624;
+      border-left: 4px solid var(--vialys-yellow);
+      padding: 14px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .calc-extra-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .calc-stat-pill {
+      background: #12141f;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid #202434;
+      font-size: 12px;
+    }
+
+    .calc-stat-pill b {
+      display: block;
+      font-size: 16px;
+      color: var(--vialys-yellow);
+      margin-top: 2px;
+    }
+
+    /* MINI-TEST DE REFLEJOS INTERACTIVO CON SEMÁFORO SVG */
+    .reaction-challenge-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .challenge-stage {
+      min-height: 270px;
+      border-radius: var(--radius-md);
+      background: #090b10;
+      border: 2px dashed #232738;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+      margin: 24px 0;
+      padding: 24px;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .challenge-stage.waiting {
+      background: #250d0d;
+      border-color: #ff3b3b;
+    }
+
+    .challenge-stage.ready {
+      background: #092817;
+      border-color: #10b981;
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
+    }
+
+    /* SEMÁFORO REALISTA SVG */
+    .traffic-light-box {
+      width: 48px;
+      height: 110px;
+      background: #1c202d;
+      border-radius: 14px;
+      border: 2px solid #343a4e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .light-lens {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #222633;
+      border: 2px solid #141722;
+      transition: all 0.2s ease;
+    }
+
+    .light-lens.red.active {
+      background: #ff3b3b;
+      box-shadow: 0 0 20px #ff3b3b;
+    }
+
+    .light-lens.yellow.active {
+      background: #ffcc00;
+      box-shadow: 0 0 20px #ffcc00;
+    }
+
+    .light-lens.green.active {
+      background: #10b981;
+      box-shadow: 0 0 25px #10b981;
+    }
+
+    .stage-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .stage-hint {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    .fake-popup-notif {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: #171b28;
+      border: 1.5px solid #25d366;
+      border-radius: 12px;
+      padding: 10px 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.85);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 10;
+      animation: popBounce 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popBounce {
+      from { transform: scale(0.6); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .reaction-history {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      font-size: 14px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .reaction-history b {
+      color: var(--vialys-yellow);
+      font-size: 18px;
+    }
+
+    /* MITOS VS REALIDAD 3D FLIP */
+    .myths-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+    }
+
+    .flip-card {
+      background-color: transparent;
+      height: 230px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: var(--radius-md);
+    }
+
+    .flip-card.flipped .flip-card-inner,
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: var(--radius-md);
+      padding: 26px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .flip-card-front {
+      background: var(--bg-card);
+    }
+
+    .flip-card-back {
+      background: linear-gradient(135deg, #1b1625 0%, #151824 100%);
+      transform: rotateY(180deg);
+      border-color: rgba(255, 204, 0, 0.4);
+    }
+
+    .card-label-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      width: fit-content;
+    }
+
+    .tag-mito {
+      color: #ff6b6b;
+      background: rgba(255, 59, 59, 0.12);
+      border: 1px solid rgba(255, 59, 59, 0.3);
+    }
+
+    .tag-verdad {
+      color: var(--vialys-yellow);
+      background: rgba(255, 204, 0, 0.12);
+      border: 1px solid rgba(255, 204, 0, 0.3);
+    }
+
+    .flip-card-front h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.4;
+      margin: auto 0;
+    }
+
+    .flip-card-back p {
+      font-size: 14.5px;
+      color: var(--text-main);
+      line-height: 1.5;
+      margin: auto 0;
+    }
+
+    .flip-hint {
+      font-size: 12px;
+      color: var(--text-dim);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* SECCIÓN DEL SIMULADOR VIALYS EMBEBIDO */
+    .simulator-section {
+      background: radial-gradient(circle at 50% 20%, #171b29, #08090d 75%);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .simulator-wrapper {
+      background: #0d0f17;
+      border: 1px solid #232738;
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .sim-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #1e2232;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .sim-brand-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-arcade);
+      font-size: 12px;
+      color: var(--vialys-yellow);
+      letter-spacing: 0.5px;
+    }
+
+    .sim-tools {
+      display: flex;
+      gap: 10px;
+    }
+
+    .sim-tool-btn {
+      background: #171a26;
+      border: 1px solid #2a2f44;
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      transition: var(--transition-smooth);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+    }
+
+    .sim-tool-btn:hover {
+      background: #23273a;
+      color: #fff;
+      border-color: var(--vialys-yellow);
+    }
+
+    .sim-split-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .sim-instructions-card {
+      background: #12141f;
+      border: 1px solid #212638;
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+
+    .sim-instructions-card h4 {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rule-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .key-badge {
+      background: #1f2436;
+      border: 1px solid #373f5a;
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: var(--vialys-yellow);
+      font-family: var(--font-arcade);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .sim-cabinet-frame {
+      background: #000;
+      border: 4px solid #1f2334;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 204, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      height: 640px;
+    }
+
+    .game-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* SECCIÓN COLECTIVO VIALYS & COMPROMISO */
+    .about-section {
+      background: var(--bg-dark);
+    }
+
+    .about-card {
+      background: linear-gradient(180deg, #131724 0%, #0d0f16 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .about-header-flex {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .about-logos-cluster {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .about-creator-pill {
+      font-family: var(--font-arcade);
+      font-size: 8px;
+      color: var(--vialys-yellow);
+      background: rgba(255, 204, 0, 0.1);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 204, 0, 0.25);
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+
+    .about-company-tag {
+      display: inline-block;
+      background: rgba(255, 204, 0, 0.15);
+      color: var(--vialys-yellow);
+      font-weight: 800;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 204, 0, 0.35);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .about-big-logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 30px var(--vialys-yellow-glow);
+      border: 3px solid var(--vialys-yellow);
+    }
+
+    .about-intro-title {
+      font-size: 32px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .about-slogan-tag {
+      font-size: 16px;
+      color: var(--vialys-yellow);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    .pledge-partner-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 204, 0, 0.1);
+      border: 1px solid rgba(255, 204, 0, 0.3);
+      color: var(--vialys-yellow);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .about-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+    }
+
+    .pillar-box {
+      background: #111420;
+      border: 1px solid #1f2334;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .pillar-box h4 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pillar-box p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    /* MÓDULO INTERACTIVO DE COMPROMISO */
+    .pledge-card {
+      background: #0a0b12;
+      border: 2px solid rgba(255, 204, 0, 0.3);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      text-align: center;
+    }
+
+    .pledge-card h3 {
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .pledge-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .pledge-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pledge-input {
+      background: #141724;
+      border: 1px solid #282f46;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .pledge-input:focus {
+      border-color: var(--vialys-yellow);
+    }
+
+    /* CREDENCIAL DIGITAL VIALYS */
+    .digital-badge {
+      display: none;
+      background: linear-gradient(135deg, #171b29, #090a0f);
+      border: 2px solid var(--vialys-yellow);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(255, 204, 0, 0.2);
+      animation: badgePop 0.4s ease-out;
+    }
+
+    @keyframes badgePop {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .badge-driver-name {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--vialys-yellow);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 10px 0 4px;
+    }
+
+    .badge-status {
+      font-size: 12px;
+      color: #10b981;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #050608;
+      border-top: 1px solid var(--border-subtle);
+      padding: 60px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 14px;
+      max-width: 380px;
+    }
+
+    .footer-col h5 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--vialys-yellow);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #141722;
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12.5px;
+      color: var(--text-dim);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-subtitle {
+        margin: 0 auto 34px;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .distraction-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .calc-layout {
+        grid-template-columns: 1fr;
+      }
+      .sim-split-layout {
+        grid-template-columns: 1fr;
+      }
+      .about-columns {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 34px;
+      }
+      .section-title {
+        font-size: 28px;
+      }
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #090a10;
+        padding: 20px;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .nav-menu.open {
+        display: flex;
+      }
+      .mobile-toggle {
+        display: block;
+      }
+      .distraction-grid, .myths-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .speed-buttons-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .action-buttons-grid {
+        grid-template-columns: 1fr;
+      }
+      .calc-box {
+        padding: 20px;
+      }
+      .sim-cabinet-frame {
+        height: 540px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="road-grid-bg"></div>
+
+  <!-- NAVEGACIÓN -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#inicio" class="brand-link">
+        <img src="saferoute-logo.jpg" alt="Logo SafeRoute" class="brand-logo-img">
+        <div class="brand-text">
+          <div class="brand-title">Safe<span>Route</span></div>
+          <div class="brand-slogan">
+            <span class="brand-company-badge">Por Colectivo VIALYS</span>
+            <span>Conectados con la vida</span>
+          </div>
+        </div>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
+        <svg class="v-icon" viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      </button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#peligro">El Peligro</a></li>
+        <li><a href="#calculadora">Calculadora a Ciegas</a></li>
+        <li><a href="#reflejos">Test de Reflejos</a></li>
+        <li><a href="#mitos">Mitos</a></li>
+        <li>
+          <a href="#simulador" class="nav-cta">
+            <svg class="v-icon v-icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9.5"/>
+              <circle cx="12" cy="12" r="3.2"/>
+              <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
+              <line x1="2.5" y1="12" x2="8.8" y2="12"/>
+              <line x1="15.2" y1="12" x2="21.5" y2="12"/>
+              <line x1="12" y1="15.2" x2="12" y2="21.5"/>
+            </svg>
+            <span>Probar Simulador</span>
+          </a>
+        </li>
+        <li><a href="#nosotros">Colectivo VIALYS</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- SECCIÓN HERO -->
+  <section class="hero-section" id="inicio">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="badge-pill">
+            <span class="pulse-dot"></span>
+            SafeRoute • Campaña Oficial de Colectivo VIALYS
+          </div>
+          <h1 class="hero-title">
+            SafeRoute: <br>
+            Conectados con la vida, <br>
+            <span class="text-yellow">no con el celular.</span>
+          </h1>
+          <p class="hero-subtitle">
+            SafeRoute es la plataforma interactiva de concientización y educación vial juvenil desarrollada por el <strong>Colectivo VIALYS</strong>. Un segundo para responder un mensaje, toda una vida para lamentarlo. Antes de salir a la calle, descubre la ciencia detrás de la distracción, pon a prueba tus reflejos y experimenta el peligro real en nuestro simulador oficial.
+          </p>
+          <div class="hero-actions">
+            <a href="#simulador" class="btn btn-primary">
+              <svg class="v-icon v-icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9.5"/>
+                <circle cx="12" cy="12" r="3.2"/>
+                <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
+                <line x1="2.5" y1="12" x2="8.8" y2="12"/>
+                <line x1="15.2" y1="12" x2="21.5" y2="12"/>
+                <line x1="12" y1="15.2" x2="12" y2="21.5"/>
+              </svg>
+              <span>Entrar al Simulador SafeRoute</span>
+            </a>
+            <a href="#calculadora" class="btn btn-secondary">
+              <svg class="v-icon v-icon-md v-icon-yellow" viewBox="0 0 24 24"><path d="M12 14v4M3.34 19a10 10 0 1 1 17.32 0M9 9l3 3"/></svg>
+              <span>Calcular Metros a Ciegas</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- MOCKUP VISUAL INTERACTIVO -->
+        <div class="hero-visual-card">
+          <div class="phone-mockup">
+            <div class="phone-notch"></div>
+            <div class="hero-dash-info">
+              <span class="speed-tag">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M12 14v4M3.34 19a10 10 0 1 1 17.32 0M9 9l3 3"/></svg>
+                <span>60 km/h</span>
+              </span>
+              <span class="danger-alert-pill">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>DISTRACCIÓN CRÍTICA</span>
+              </span>
+            </div>
+
+            <div class="simulated-notifs">
+              <div class="mock-notif">
+                <div class="mock-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.63C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.16C10.56 20.16 9.1 19.76 7.83 19.01L7.53 18.83L4.41 19.65L5.24 16.61L5.04 16.3C4.22 14.99 3.78 13.47 3.78 11.91C3.78 7.36 7.49 3.65 12.04 3.65C14.25 3.65 16.32 4.51 17.88 6.07C19.44 7.63 20.3 9.7 20.3 11.91C20.3 16.47 16.59 20.16 12.05 20.16Z"/></svg>
+                </div>
+                <div class="mock-content">
+                  <div class="mock-sender">
+                    WhatsApp <span>ahora</span>
+                  </div>
+                  <div class="mock-msg">"¿Dónde vienes? ¡Ya arrancó la fiesta!"</div>
+                </div>
+              </div>
+              <div class="mock-notif">
+                <div class="mock-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#E1306C" stroke-width="2"/><circle cx="12" cy="12" r="4.5" stroke="#E1306C" stroke-width="2"/><circle cx="18" cy="6" r="1.2" fill="#E1306C"/></svg>
+                </div>
+                <div class="mock-content">
+                  <div class="mock-sender">
+                    Instagram <span>hace 1m</span>
+                  </div>
+                  <div class="mock-msg">@amigo te etiquetó en una historia</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="attention-gauge">
+              <div class="gauge-label">
+                <span>Atención al camino</span>
+                <span style="color:#ff4d4d;font-weight:900;">14%</span>
+              </div>
+              <div class="gauge-bar-bg">
+                <div class="gauge-bar-fill"></div>
+              </div>
+              <div class="gauge-warning">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+                <span>Visión periférica bloqueada</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CINTA DE IMPACTO / ESTADÍSTICAS -->
+  <div class="stats-ribbon">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">400%</div>
+          <div class="stat-title">Mayor riesgo de choque</div>
+          <div class="stat-desc">según la Organización Mundial de la Salud (OMS).</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">80 m</div>
+          <div class="stat-title">Recorridos a ciegas</div>
+          <div class="stat-desc">en los 5 segundos que tardas en leer un WhatsApp.</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">#1</div>
+          <div class="stat-title">Causa de muerte accidental</div>
+          <div class="stat-desc">en jóvenes de entre 15 y 29 años en carretera.</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">27 s</div>
+          <div class="stat-title">Atención residual</div>
+          <div class="stat-desc">tarda tu mente en reenfocarse tras soltar el celular.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 1: LA PROBLEMÁTICA & TECNODEPENDENCIA -->
+  <section id="peligro">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">
+          <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          La Amenaza Invisible
+        </span>
+        <h2 class="section-title">¿Por qué la Tecnodependencia es mortal al volante?</h2>
+        <p class="section-desc">
+          No se trata de falta de habilidad para manejar. El cerebro humano está condicionado a buscar la dopamina de cada notificación. Al volante, el teléfono desata <b>4 tipos de distracciones letales</b> al mismo instante.
+        </p>
+      </div>
+
+      <div class="distraction-grid">
+        <div class="distract-card">
+          <div class="distract-icon-wrap">
+            👁️
+          </div>
+          <h3>Distracción Visual</h3>
+          <p>
+            Apartas los ojos del camino. Mirar la pantalla apenas 3 segundos equivale a cruzar media cuadra con una venda en los ojos sin ver peatones ni semáforos.
+          </p>
+          <div class="consequence">
+            <span>⚠️ Pierdes el 90% del campo visual</span>
+          </div>
+        </div>
+
+        <div class="distract-card">
+          <div class="distract-icon-wrap">
+            🖐️
+          </div>
+          <h3>Distracción Manual</h3>
+          <p>
+            Retiras una o ambas manos del volante para teclear, sostener o deslizar. Si un auto frena o un bache aparece, no tienes tiempo físico para girar.
+          </p>
+          <div class="consequence">
+            <span>⚠️ Reduce tu capacidad de maniobra en 80%</span>
+          </div>
+        </div>
+
+        <div class="distract-card">
+          <div class="distract-icon-wrap">
+            🧠
+          </div>
+          <h3>Distracción Cognitiva</h3>
+          <p>
+            Tu cerebro procesa emociones, respuestas y textos en lugar de anticipar el tráfico. Esto provoca <i>ceguera por inatención</i>: ves la luz roja pero tu mente no frena.
+          </p>
+          <div class="consequence">
+            <span>⚠️ Tiempo de reacción triplicado</span>
+          </div>
+        </div>
+
+        <div class="distract-card">
+          <div class="distract-icon-wrap">
+            👂
+          </div>
+          <h3>Distracción Auditiva</h3>
+          <p>
+            Audífonos, llamadas o música a alto volumen cancelan los sonidos del entorno vial: bocinas de emergencia, sirenas de ambulancias o rechinido de llantas.
+          </p>
+          <div class="consequence">
+            <span>⚠️ Aislamiento acústico de alarmas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2: CALCULADORA INTERACTIVA DE METROS A CIEGAS -->
+  <section id="calculadora" style="background:#0b0d14;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">
+          <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M12 14v4M3.34 19a10 10 0 1 1 17.32 0M9 9l3 3"/></svg>
+          Simulador Científico
+        </span>
+        <h2 class="section-title">Calculadora de "Metros a Ciegas"</h2>
+        <p class="section-desc">
+          Selecciona tu velocidad y lo que crees que es una "revisión inofensiva" de tu celular. Descubre cuántos metros avanzas sin control de la realidad.
+        </p>
+      </div>
+
+      <div class="calculator-box">
+        <div class="calc-layout">
+          <div class="calc-controls">
+            <!-- Velocidad -->
+            <div class="control-group">
+              <label>
+                <span>Velocidad del Vehículo:</span>
+                <span class="speed-badge" id="speedDisplay">60 km/h</span>
+              </label>
+              <div class="speed-buttons-grid">
+                <button class="chip-btn" data-speed="40">40 km/h<span class="chip-sub">Zona Urbana</span></button>
+                <button class="chip-btn active" data-speed="60">60 km/h<span class="chip-sub">Avenida</span></button>
+                <button class="chip-btn" data-speed="80">80 km/h<span class="chip-sub">Vía Rápida</span></button>
+                <button class="chip-btn" data-speed="100">100 km/h<span class="chip-sub">Carretera</span></button>
+                <button class="chip-btn" data-speed="120">120 km/h<span class="chip-sub">Autopista</span></button>
+              </div>
+            </div>
+
+            <!-- Acción con el celular -->
+            <div class="control-group">
+              <label>
+                <span>Acción en el Celular:</span>
+                <span class="dist-badge" id="actionDisplay">5 seg (WhatsApp)</span>
+              </label>
+              <div class="action-buttons-grid">
+                <button class="chip-btn" data-time="2" data-name="Mirar Notificación">
+                  <svg class="v-icon v-icon-md" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2.5"/><path d="M12 18h.01"/><path d="M9 6h6"/></svg>
+                  <span>Ver quién escribió</span>
+                  <span class="chip-sub">2.0 segundos</span>
+                </button>
+                <button class="chip-btn" data-time="3.5" data-name="Cambiar Canción">
+                  <svg class="v-icon v-icon-md" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                  <span>Spotify / Música</span>
+                  <span class="chip-sub">3.5 segundos</span>
+                </button>
+                <button class="chip-btn active" data-time="5" data-name="Escribir WhatsApp">
+                  <svg class="v-icon v-icon-md" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  <span>Responder WhatsApp</span>
+                  <span class="chip-sub">5.0 segundos</span>
+                </button>
+                <button class="chip-btn" data-time="7" data-name="Reel / TikTok">
+                  <svg class="v-icon v-icon-md" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="3"/><path d="m10 8 6 4-6 4V8z"/></svg>
+                  <span>Mirar un Reel / Video</span>
+                  <span class="chip-sub">7.0 segundos</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- RESULTADOS DINÁMICOS -->
+          <div class="calc-results-wrap">
+            <div class="big-metric-center">
+              <div class="blind-distance-val" id="blindDistanceVal">83.3 m</div>
+              <div class="blind-distance-lbl">Recorridos a ciegas en tu vehículo</div>
+            </div>
+
+            <!-- Pista animada -->
+            <div class="road-track-sim">
+              <div class="road-track-line"></div>
+              <div class="road-blind-fill" id="trackBlindFill">
+                <span id="fillMetersText">83m CIEGOS</span>
+                <svg class="car-marker-svg" viewBox="0 0 48 24" fill="#ffffff">
+                  <path d="M4 16h40l-4-8c-1-2-3-3-5-3H13c-2 0-4 1-5 3L4 16z"/>
+                  <circle cx="12" cy="18" r="4" fill="#111"/>
+                  <circle cx="36" cy="18" r="4" fill="#111"/>
+                  <circle cx="12" cy="18" r="1.5" fill="#ffcc00"/>
+                  <circle cx="36" cy="18" r="1.5" fill="#ffcc00"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="real-world-comparison" id="realWorldComp">
+              <svg class="v-icon-lg v-icon-yellow" viewBox="0 0 24 24"><path d="M2 12c0-4.4 4.5-8 10-8s10 3.6 10 8-4.5 8-10 8-10-3.6-10-8Z"/><path d="M7 12c0-2.2 2.2-4 5-4s5 1.8 5 4-2.2 4-5 4-5-1.8-5-4Z"/><line x1="12" y1="4" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="20"/></svg>
+              <span id="compText">¡Es casi <b>1 cancha de fútbol profesional completa (105m)</b> conduciendo con los ojos vendados!</span>
+            </div>
+
+            <div class="calc-extra-stats">
+              <div class="calc-stat-pill">
+                Tiempo a Ciegas
+                <b id="extraTime">5.0 segundos</b>
+              </div>
+              <div class="calc-stat-pill">
+                Riesgo de Impacto
+                <b id="extraRisk">+900% probabilidad</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3: MINI TEST DE REFLEJOS EN VIVO -->
+  <section id="reflejos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">
+          <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Desafío Interactivo
+        </span>
+        <h2 class="section-title">El Mito del Multitasking: Pon a prueba tus reflejos</h2>
+        <p class="section-desc">
+          ¿Crees que puedes reaccionar a tiempo mientras te distrae un teléfono? Haz clic en la caja tan pronto como la luz del semáforo cambie a <b>VERDE</b>.
+        </p>
+      </div>
+
+      <div class="reaction-challenge-card">
+        <div style="display:flex;justify-content:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;">
+          <button class="btn btn-secondary" id="modeNormalBtn" style="font-size:13px;padding:8px 16px;">Modo 1: Sin Celular</button>
+          <button class="btn btn-secondary" id="modeDistractedBtn" style="font-size:13px;padding:8px 16px;">Modo 2: Con Celular (Notificaciones)</button>
+        </div>
+
+        <div class="challenge-stage" id="challengeStage">
+          <!-- Semáforo Dinámico -->
+          <div class="traffic-light-box" id="trafficLightWidget">
+            <div class="light-lens red" id="lightRed"></div>
+            <div class="light-lens yellow" id="lightYellow"></div>
+            <div class="light-lens green" id="lightGreen"></div>
+          </div>
+
+          <div class="stage-title" id="stageTitle">Haz clic aquí para iniciar la prueba</div>
+          <div class="stage-hint" id="stageHint">Mantén la vista fija. Cuando el semáforo cambie a VERDE, haz clic lo más rápido posible.</div>
+        </div>
+
+        <div class="reaction-history">
+          <div>Reflejo Normal: <b id="bestNormal">-- ms</b></div>
+          <div>Reflejo con Celular: <b id="bestDistracted" style="color:var(--vialys-red);">-- ms</b></div>
+          <div>Diferencia Vial: <b id="delayResult">-- metros extra</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 4: MITOS VS REALIDADES (TARJETAS 3D) -->
+  <section id="mitos" style="background:#0b0d14;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">
+          <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Desarmando Creencias
+        </span>
+        <h2 class="section-title">Mitos Juveniles vs. Realidad Médica</h2>
+        <p class="section-desc">
+          Pasa el cursor o toca cada tarjeta para descubrir por qué las excusas comunes al volante no se sostienen ante la física.
+        </p>
+      </div>
+
+      <div class="myths-grid">
+        <!-- Mito 1 -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="card-label-tag tag-mito">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                MITO COMÚN #1
+              </span>
+              <h3>"Si el semáforo está en rojo, puedo revisar mis mensajes sin ningún peligro."</h3>
+              <div class="flip-hint">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+                <span>Toca para ver la evidencia</span>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <span class="card-label-tag tag-verdad">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                VERDAD CIENTÍFICA
+              </span>
+              <p>Tu mente sufre de <b>atención residual</b> hasta por 27 segundos. Arrancas en verde sin registrar ciclistas, peatones apresurados o vehículos que se pasaron la luz roja.</p>
+              <div class="flip-hint">Fuente: Fundación AAA para la Seguridad del Tráfico</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mito 2 -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="card-label-tag tag-mito">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                MITO COMÚN #2
+              </span>
+              <h3>"Yo no escribo textos, solo mando notas de voz o uso manos libres."</h3>
+              <div class="flip-hint">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+                <span>Toca para ver la evidencia</span>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <span class="card-label-tag tag-verdad">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                VERDAD CIENTÍFICA
+              </span>
+              <p>La distracción cognitiva es <b>idéntica</b>. Tu cerebro reconstruye mentalmente el mensaje y desactiva tu visión periférica (efecto túnel), ignorando señales clave.</p>
+              <div class="flip-hint">Fuente: Consejo Nacional de Seguridad (NSC)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mito 3 -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="card-label-tag tag-mito">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                MITO COMÚN #3
+              </span>
+              <h3>"Soy joven, juego videojuegos y mis reflejos son súper rápidos."</h3>
+              <div class="flip-hint">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+                <span>Toca para ver la evidencia</span>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <span class="card-label-tag tag-verdad">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                VERDAD CIENTÍFICA
+              </span>
+              <p>Los reflejos no pueden ganarle a las leyes de la inercia de 1,500 kg de metal en movimiento. Más del 68% de las víctimas jóvenes creían tener "excelentes reflejos".</p>
+              <div class="flip-hint">Fuente: OMS - Informe Mundial sobre Traumatismos</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mito 4 -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="card-label-tag tag-mito">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                MITO COMÚN #4
+              </span>
+              <h3>"Solo bajo la velocidad cuando voy a contestar algo rápido."</h3>
+              <div class="flip-hint">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+                <span>Toca para ver la evidencia</span>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <span class="card-label-tag tag-verdad">
+                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                VERDAD CIENTÍFICA
+              </span>
+              <p>Reducir la velocidad bruscamente en avenidas o autopistas sin fijarse ocasiona colisiones traseras masivas y vuelcos al invadir carriles contiguos involuntariamente.</p>
+              <div class="flip-hint">Fuente: Conapra México</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 5: EL SIMULADOR DE MANEJO VIALYS -->
+  <section class="simulator-section" id="simulador">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">
+          <svg class="v-icon v-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9.5"/>
+            <circle cx="12" cy="12" r="3.2"/>
+            <line x1="2.5" y1="12" x2="8.8" y2="12"/>
+            <line x1="15.2" y1="12" x2="21.5" y2="12"/>
+            <line x1="12" y1="15.2" x2="12" y2="21.5"/>
+          </svg>
+          Experiencia Práctica
+        </span>
+        <h2 class="section-title">Simulador SafeRoute: Distracción Fatal</h2>
+        <p class="section-desc">
+          Tecnología y experiencia interactiva desarrollada por el <b>Colectivo VIALYS</b>. Ponte al volante en un entorno seguro antes de salir a la vida real. Intenta mantener tu vehículo en el carril mientras te bombardean notificaciones continuas. ¿Podrás sobrevivir?
+        </p>
+      </div>
+
+      <div class="simulator-wrapper">
+        <div class="sim-top-bar">
+          <div class="sim-brand-title">
+            <img src="saferoute-logo.jpg" style="width:28px;height:28px;border-radius:6px;object-fit:cover;" alt="SafeRoute">
+            <span>CABINA DE SIMULACIÓN SAFEROUTE • TECNOLOGÍA VIALYS</span>
+          </div>
+          <div class="sim-tools">
+            <button class="sim-tool-btn" id="reloadGameBtn" title="Reiniciar partida">
+              <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+              <span>Reiniciar</span>
+            </button>
+            <button class="sim-tool-btn" id="fullScreenBtn" title="Pantalla completa">
+              <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              <span>Pantalla Completa</span>
+            </button>
+            <a href="vialys.juego.html" target="_blank" class="sim-tool-btn" title="Abrir en pestaña nueva">
+              <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Pestaña Independiente</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="sim-split-layout">
+          <!-- Instrucciones del simulador -->
+          <div class="sim-instructions-card">
+            <h4>
+              <svg class="v-icon v-icon-md v-icon-yellow" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              <span>Reglas de Conducción</span>
+            </h4>
+
+            <div class="rule-item">
+              <span class="key-badge">◀ ▶</span>
+              <div>
+                <b>Controles de movimiento:</b> Usa las flechas del teclado o las teclas <span class="key-badge">A</span> y <span class="key-badge">D</span> para esquivar autos y obstáculos.
+              </div>
+            </div>
+
+            <div class="rule-item">
+              <span class="key-badge">CLIC</span>
+              <div>
+                <b>Cierra distracciones:</b> Da clic sobre cada notificación que aparezca antes de que tu <i>Atención al Camino</i> llegue a cero.
+              </div>
+            </div>
+
+            <div class="rule-item">
+              <span class="key-badge">PELIGRO</span>
+              <div>
+                <b>Consecuencia fatal:</b> Chocar contra un auto o quedarte sin atención terminará tu viaje al instante.
+              </div>
+            </div>
+
+            <div style="background:#191d2c;padding:12px;border-radius:8px;font-size:12px;color:var(--vialys-yellow);margin-top:16px;display:flex;align-items:flex-start;gap:8px;">
+              <svg class="v-icon v-icon-sm" viewBox="0 0 24 24" style="margin-top:2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <div><b>Reflexión en juego:</b> Observa cómo tus ojos se cansan de alternar entre el tráfico y los mensajes. En la carretera real, esa fatiga cobra vidas.</div>
+            </div>
+          </div>
+
+          <!-- Cabina de juego embebida -->
+          <div class="sim-cabinet-frame" id="simCabinet">
+            <iframe src="vialys.juego.html" class="game-iframe" id="gameFrame" title="Simulador SafeRoute — VIALYS"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 6: COLECTIVO VIALYS & COMPROMISO DIGITAL -->
+  <section class="about-section" id="nosotros">
+    <div class="container">
+      <div class="about-card">
+        <div class="about-header-flex">
+          <div class="about-logos-cluster">
+            <img src="logo.png" alt="Emblema Oficial Colectivo VIALYS" class="about-big-logo" title="Colectivo VIALYS">
+            <div class="about-creator-pill">CREADORES DE SAFEROUTE</div>
+          </div>
+          <div>
+            <span class="about-company-tag">Empresa & Colectivo Creador</span>
+            <h2 class="about-intro-title">Conoce al Colectivo VIALYS</h2>
+            <div class="about-slogan-tag">"Conectados con la vida, no con el celular" — Los creadores de la iniciativa SafeRoute</div>
+          </div>
+        </div>
+
+        <div class="about-columns">
+          <!-- Columna Misión -->
+          <div>
+            <div class="pillar-box">
+              <h4>
+                <svg class="v-icon v-icon-md v-icon-yellow" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                <span>¿Quiénes somos y qué representa VIALYS?</span>
+              </h4>
+              <p>
+                <strong>VIALYS</strong> nació como un colectivo juvenil y proyecto empresarial estudiantil motivado por una realidad alarmante: la tecnología que debería comunicarnos se ha convertido en el arma más peligrosa al momento de conducir. Como empresa y equipo fundador, diseñamos y lanzamos la iniciativa <strong>SafeRoute</strong> para traducir la concientización en herramientas visuales, científicas e interactivas que conecten directamente con los jóvenes.
+              </p>
+            </div>
+
+            <div class="pillar-box">
+              <h4>
+                <svg class="v-icon v-icon-md v-icon-yellow" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span>Soluciones Prácticas que Promovemos</span>
+              </h4>
+              <p>
+                • Activar el modo "No molestar al conducir" en iOS y Android antes de encender el motor.<br>
+                • Designar al copiloto como "Administrador de la Música y Mensajes".<br>
+                • Guardar el celular en la guantera o mochila fuera del alcance de la mano.<br>
+                • Difundir SafeRoute en escuelas, comunidades y redes para que más personas conozcan el trabajo de VIALYS.
+              </p>
+            </div>
+          </div>
+
+          <!-- Columna Compromiso Interactivo -->
+          <div class="pledge-card">
+            <div class="pledge-partner-tag">
+              <img src="saferoute-logo.jpg" style="width:18px;height:18px;border-radius:4px;object-fit:cover;" alt="SafeRoute">
+              <span>ALIANZA POR LA VIDA • VIALYS & SAFEROUTE</span>
+            </div>
+            <h3>Firma el Manifiesto SafeRoute & VIALYS</h3>
+            <p>Genera tu credencial digital personalizada como Conductor Consciente avalada por el Colectivo VIALYS.</p>
+
+            <form class="pledge-form" id="pledgeForm" onsubmit="event.preventDefault(); generateBadge();">
+              <input type="text" id="driverNameInput" class="pledge-input" placeholder="Escribe tu nombre completo..." required>
+              <button type="submit" class="btn btn-primary" style="width:100%;">
+                <svg class="v-icon v-icon-md" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                <span>Firmar Compromiso por la Vida</span>
+              </button>
+            </form>
+
+            <div class="digital-badge" id="driverBadge">
+              <div style="display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:10px;">
+                <img src="logo.png" style="width:32px;height:32px;border-radius:50%;border:1.5px solid var(--vialys-yellow);" alt="Colectivo VIALYS" title="Colectivo VIALYS">
+                <svg class="v-icon-lg v-icon-yellow" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <img src="saferoute-logo.jpg" style="width:32px;height:32px;border-radius:6px;border:1px solid rgba(255,204,0,0.5);" alt="SafeRoute" title="SafeRoute">
+              </div>
+              <div class="badge-status">Conductor Certificado Consciente</div>
+              <div class="badge-driver-name" id="badgeName">TU NOMBRE</div>
+              <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">
+                Se compromete a mantener el celular fuera de su vista mientras conduce para proteger vidas en el camino. Certificado avalado por SafeRoute y Colectivo VIALYS.
+              </div>
+              <div style="font-family:var(--font-arcade);font-size:9px;color:var(--vialys-yellow);">FOLIO VIALYS / SAFEROUTE #<span id="badgeFolio">0000</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <img src="saferoute-logo.jpg" alt="Logo SafeRoute" style="width:42px;height:42px;border-radius:10px;object-fit:cover;border:2px solid rgba(255,204,0,0.4);">
+            <div class="brand-title">Safe<span>Route</span></div>
+          </div>
+          <p>
+            SafeRoute es una plataforma integral de concientización y educación vial juvenil impulsada por el <strong>Colectivo VIALYS</strong>. Prevenir accidentes mortales causados por la tecnodependencia comienza por soltar la pantalla.
+          </p>
+          <div style="margin-top:18px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.03);padding:10px 16px;border-radius:12px;border:1px solid rgba(255,204,0,0.25);max-width:400px;">
+            <img src="logo.png" alt="Emblema Colectivo VIALYS" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid var(--vialys-yellow);">
+            <div>
+              <div style="font-size:13px;font-weight:800;color:#fff;">Colectivo VIALYS</div>
+              <div style="font-size:11px;color:var(--text-muted);">Empresa y grupo creador de SafeRoute</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Navegación</h5>
+          <ul class="footer-links">
+            <li><a href="#inicio">Inicio SafeRoute</a></li>
+            <li><a href="#peligro">El Peligro del Celular</a></li>
+            <li><a href="#calculadora">Calculadora a Ciegas</a></li>
+            <li><a href="#reflejos">Test de Reflejos</a></li>
+            <li><a href="#simulador">Simulador Oficial</a></li>
+            <li><a href="#nosotros">Conoce al Colectivo VIALYS</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Recursos y Enlaces</h5>
+          <ul class="footer-links">
+            <li><a href="https://www.who.int/es/news-room/fact-sheets/detail/road-traffic-injuries" target="_blank" rel="noopener">Organización Mundial de la Salud (OMS)</a></li>
+            <li><a href="https://www.nsc.org/" target="_blank" rel="noopener">National Safety Council</a></li>
+            <li><a href="vialys.juego.html" target="_blank">Simulador en Pantalla Completa</a></li>
+            <li><a href="#nosotros">Sobre Colectivo VIALYS</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 <b>SafeRoute</b> — Desarrollado por <b>Colectivo VIALYS</b>. Conectados con la vida, no con el celular. Todos los derechos reservados.</div>
+        <div>Ningún mensaje vale una vida humana.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LÓGICA INTERACTIVA JAVASCRIPT -->
+  <script>
+    // Menú móvil toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navMenu = document.getElementById('navMenu');
+    mobileToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+    });
+
+    // Cerrar menú móvil al hacer clic en un enlace
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => navMenu.classList.remove('open'));
+    });
+
+    // ----------------------------------------------------
+    // CALCULADORA DE METROS A CIEGAS
+    // ----------------------------------------------------
+    let currentSpeed = 60; // km/h
+    let currentTime = 5.0; // seg
+    let currentActionName = "Escribir WhatsApp";
+
+    const speedButtons = document.querySelectorAll('.speed-buttons-grid .chip-btn');
+    const actionButtons = document.querySelectorAll('.action-buttons-grid .chip-btn');
+    const speedDisplay = document.getElementById('speedDisplay');
+    const actionDisplay = document.getElementById('actionDisplay');
+    const blindDistanceVal = document.getElementById('blindDistanceVal');
+    const trackBlindFill = document.getElementById('trackBlindFill');
+    const fillMetersText = document.getElementById('fillMetersText');
+    const compText = document.getElementById('compText');
+    const extraTime = document.getElementById('extraTime');
+    const extraRisk = document.getElementById('extraRisk');
+
+    function updateCalculator() {
+      // d = v (m/s) * t (s)
+      const speedMs = (currentSpeed * 1000) / 3600;
+      const meters = speedMs * currentTime;
+      const formattedMeters = meters.toFixed(1);
+
+      blindDistanceVal.textContent = formattedMeters + " m";
+      fillMetersText.textContent = Math.round(meters) + "m CIEGOS";
+
+      // Porcentaje de la barra (con límite visual 15% - 95%)
+      const maxTrackMeters = 200;
+      const fillPercent = Math.min(95, Math.max(15, (meters / maxTrackMeters) * 100));
+      trackBlindFill.style.width = fillPercent + "%";
+
+      extraTime.textContent = currentTime.toFixed(1) + " segundos";
+
+      // Equivalencias del mundo real impactantes
+      let comp = "";
+      if (meters < 25) {
+        comp = `Equivale a <b>${Math.round(meters / 4.5)} autos compactos estacionados en fila</b> avanzando sin que nadie mire el camino.`;
+        extraRisk.textContent = "+400% probabilidad de choque";
+      } else if (meters < 50) {
+        comp = `¡Equivale a cruzar <b>una piscina olímpica de 50 metros</b> con los ojos completamente cerrados!`;
+        extraRisk.textContent = "+650% probabilidad de choque";
+      } else if (meters < 95) {
+        comp = `¡Equivale a <b>casi una cancha de fútbol profesional entera (105m)</b> avanzando a ciegas!`;
+        extraRisk.textContent = "+1,200% probabilidad de choque";
+      } else if (meters < 150) {
+        comp = `¡Equivale a <b>más de 1 cancha de fútbol y media</b> sin ningún control visual del camino!`;
+        extraRisk.textContent = "+1,800% probabilidad de choque";
+      } else {
+        comp = `¡Equivale a <b>más de 2 estadios olímpicos seguidos</b>! La probabilidad de un desenlace fatal supera el 95%.`;
+        extraRisk.textContent = "+2,300% probabilidad mortal";
+      }
+
+      compText.innerHTML = comp;
+    }
+
+    speedButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        speedButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSpeed = parseFloat(btn.dataset.speed);
+        speedDisplay.textContent = currentSpeed + " km/h";
+        updateCalculator();
+      });
+    });
+
+    actionButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        actionButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTime = parseFloat(btn.dataset.time);
+        currentActionName = btn.dataset.name;
+        actionDisplay.textContent = currentTime + " seg (" + currentActionName + ")";
+        updateCalculator();
+      });
+    });
+
+    updateCalculator();
+
+    // ----------------------------------------------------
+    // TEST DE REFLEJOS EN VIVO CON SEMÁFORO SVG
+    // ----------------------------------------------------
+    const challengeStage = document.getElementById('challengeStage');
+    const stageTitle = document.getElementById('stageTitle');
+    const stageHint = document.getElementById('stageHint');
+    const bestNormal = document.getElementById('bestNormal');
+    const bestDistracted = document.getElementById('bestDistracted');
+    const delayResult = document.getElementById('delayResult');
+    const modeNormalBtn = document.getElementById('modeNormalBtn');
+    const modeDistractedBtn = document.getElementById('modeDistractedBtn');
+    const lightRed = document.getElementById('lightRed');
+    const lightYellow = document.getElementById('lightYellow');
+    const lightGreen = document.getElementById('lightGreen');
+
+    let isDistractedMode = false;
+    let testState = 'idle'; // idle, waiting, green
+    let timerStart = 0;
+    let timeoutId = null;
+    let normalTime = null;
+    let distractedTime = null;
+
+    modeNormalBtn.classList.add('active');
+
+    function setTrafficLights(red, yellow, green) {
+      if (red) lightRed.classList.add('active'); else lightRed.classList.remove('active');
+      if (yellow) lightYellow.classList.add('active'); else lightYellow.classList.remove('active');
+      if (green) lightGreen.classList.add('active'); else lightGreen.classList.remove('active');
+    }
+
+    modeNormalBtn.addEventListener('click', () => {
+      isDistractedMode = false;
+      modeNormalBtn.style.borderColor = 'var(--vialys-yellow)';
+      modeDistractedBtn.style.borderColor = 'var(--border-subtle)';
+      resetTest("Modo Sin Celular seleccionado. Haz clic para probar tus reflejos puros.");
+    });
+
+    modeDistractedBtn.addEventListener('click', () => {
+      isDistractedMode = true;
+      modeDistractedBtn.style.borderColor = 'var(--vialys-red)';
+      modeNormalBtn.style.borderColor = 'var(--border-subtle)';
+      resetTest("Modo Con Celular seleccionado. ¡Cuidado con las notificaciones sorpresa!");
+    });
+
+    function resetTest(customMsg) {
+      clearTimeout(timeoutId);
+      testState = 'idle';
+      challengeStage.className = 'challenge-stage';
+      setTrafficLights(false, false, false);
+      stageTitle.textContent = 'Haz clic aquí para iniciar la prueba';
+      stageHint.textContent = customMsg || 'Cuando cambie a VERDE, haz clic inmediatamente.';
+      removePopups();
+    }
+
+    function removePopups() {
+      document.querySelectorAll('.fake-popup-notif').forEach(p => p.remove());
+    }
+
+    challengeStage.addEventListener('click', () => {
+      if (testState === 'idle') {
+        // Iniciar espera
+        testState = 'waiting';
+        challengeStage.className = 'challenge-stage waiting';
+        setTrafficLights(true, false, false);
+        stageTitle.textContent = '¡ESPERA EL VERDE!...';
+        stageHint.textContent = 'No hagas clic todavía o perderás el intento.';
+        removePopups();
+
+        const waitTime = Math.random() * 2500 + 1500;
+
+        // Si es modo distracción, lanzar popups repentinos mientras espera
+        if (isDistractedMode) {
+          setTimeout(() => {
+            if (testState === 'waiting') {
+              const popup = document.createElement('div');
+              popup.className = 'fake-popup-notif';
+              popup.innerHTML = `
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.63C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.16C10.56 20.16 9.1 19.76 7.83 19.01L7.53 18.83L4.41 19.65L5.24 16.61L5.04 16.3C4.22 14.99 3.78 13.47 3.78 11.91C3.78 7.36 7.49 3.65 12.04 3.65C14.25 3.65 16.32 4.51 17.88 6.07C19.44 7.63 20.3 9.7 20.3 11.91C20.3 16.47 16.59 20.16 12.05 20.16Z"/></svg>
+                <span>WhatsApp: "¡Urge que me marques ya!"</span>
+              `;
+              challengeStage.appendChild(popup);
+            }
+          }, 800);
+        }
+
+        timeoutId = setTimeout(() => {
+          testState = 'green';
+          timerStart = performance.now();
+          challengeStage.className = 'challenge-stage ready';
+          setTrafficLights(false, false, true);
+          stageTitle.textContent = '¡FRENAR AHORA! (CLIC)';
+          stageHint.textContent = '¡Reacciona ya!';
+        }, waitTime);
+
+      } else if (testState === 'waiting') {
+        // Clic antes de tiempo (falso arranque)
+        clearTimeout(timeoutId);
+        testState = 'idle';
+        challengeStage.className = 'challenge-stage';
+        setTrafficLights(false, true, false);
+        stageTitle.textContent = '¡Arrancaste antes de tiempo!';
+        stageHint.textContent = 'La ansiedad por la notificación te hizo actuar a ciegas. Haz clic para reintentar.';
+        removePopups();
+
+      } else if (testState === 'green') {
+        // Clic a tiempo
+        const reactionTime = Math.round(performance.now() - timerStart);
+        testState = 'idle';
+        challengeStage.className = 'challenge-stage';
+        setTrafficLights(false, false, false);
+        removePopups();
+
+        if (!isDistractedMode) {
+          normalTime = reactionTime;
+          bestNormal.textContent = reactionTime + " ms";
+          stageTitle.textContent = `¡Tu reflejo fue de ${reactionTime} ms!`;
+          stageHint.textContent = 'Ahora selecciona el Modo 2 (Con Celular) para comprobar cómo tus reflejos colapsan con distracciones.';
+        } else {
+          distractedTime = reactionTime;
+          bestDistracted.textContent = reactionTime + " ms";
+          stageTitle.textContent = `Tu reflejo cayó a ${reactionTime} ms con celular`;
+          
+          if (normalTime) {
+            const diff = distractedTime - normalTime;
+            // A 60 km/h, cada segundo son 16.6 metros.
+            const extraMeters = ((diff / 1000) * 16.6).toFixed(1);
+            delayResult.textContent = `+${diff} ms (~${extraMeters} m extra antes de frenar)`;
+            stageHint.textContent = `Tardaste ${diff} ms más. En la calle real a 60 km/h, eso significa avanzar ${extraMeters} metros más antes de empezar a pisar el freno.`;
+          } else {
+            stageHint.textContent = 'Prueba también el Modo 1 para comparar tu tiempo puro.';
+          }
+        }
+      }
+    });
+
+    // ----------------------------------------------------
+    // TARJETAS 3D FLIP PARA MÓVILES (TOGGLE CLIC)
+    // ----------------------------------------------------
+    document.querySelectorAll('.flip-card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('flipped');
+      });
+    });
+
+    // ----------------------------------------------------
+    // GENERADOR DE COMPROMISO VIAL VIALYS
+    // ----------------------------------------------------
+    function generateBadge() {
+      const nameInput = document.getElementById('driverNameInput');
+      const badge = document.getElementById('driverBadge');
+      const badgeName = document.getElementById('badgeName');
+      const badgeFolio = document.getElementById('badgeFolio');
+
+      if (!nameInput.value.trim()) return;
+
+      badgeName.textContent = nameInput.value.trim().toUpperCase();
+      badgeFolio.textContent = Math.floor(1000 + Math.random() * 9000);
+      badge.style.display = 'block';
+
+      // Scroll suave hacia la credencial
+      badge.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // ----------------------------------------------------
+    // CONTROLES DE LA CABINA DEL SIMULADOR
+    // ----------------------------------------------------
+    const gameFrame = document.getElementById('gameFrame');
+    const reloadGameBtn = document.getElementById('reloadGameBtn');
+    const fullScreenBtn = document.getElementById('fullScreenBtn');
+    const simCabinet = document.getElementById('simCabinet');
+
+    reloadGameBtn.addEventListener('click', () => {
+      gameFrame.src = gameFrame.src;
+    });
+
+    fullScreenBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        simCabinet.requestFullscreen().catch(err => {
+          window.open('vialys.juego.html', '_blank');
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    });
+  </script>
+</body>
+</html>

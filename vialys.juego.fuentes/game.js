@@ -1274,14 +1274,14 @@
     overlay.classList.remove('scroll');
     overlay.innerHTML = `
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;justify-content:center;">
-        <img src="images/logo.png" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #ffcc00;box-shadow:0 0 16px rgba(255,204,0,0.4);" alt="VIALYS">
+        <img src="images/saferoute-logo.jpg" style="width:48px;height:48px;border-radius:10px;object-fit:cover;border:2px solid #ffcc00;box-shadow:0 0 16px rgba(255,204,0,0.4);" alt="SafeRoute">
         <div style="text-align:left;">
-          <div style="font-family:var(--pixel-font);font-size:12px;color:#ffcc00;letter-spacing:1px;">PROYECTO VIALYS</div>
-          <div style="font-size:10px;color:var(--muted);margin-top:2px;">Conectados con la vida, no con el celular</div>
+          <div style="font-family:var(--pixel-font);font-size:12px;color:#ffcc00;letter-spacing:1px;">SAFEROUTE</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px;">Por Colectivo VIALYS • Conectados con la vida</div>
         </div>
       </div>
       <h1>Distracción <span>Fatal</span></h1>
-      <p>Eres el conductor. Mientras avanzas por la carretera, tu celular no dejará de interrumpirte. Cierra las notificaciones a tiempo o perderás de vista el camino... y la vida de alguien.</p>
+      <p>Simulador interactivo <b>SafeRoute</b> desarrollado por el Colectivo VIALYS. Eres el conductor: tu celular no dejará de interrumpirte. Cierra las notificaciones a tiempo o perderás el control del vehículo.</p>
       <div class="rules">
         <li><b>Mueve el auto</b> con las flechas ◀ ▶ (o A / D) para esquivar obstáculos.</li>
         <li><b>Da clic</b> sobre cada notificación para cerrarla antes de que se acumulen.</li>
@@ -1293,7 +1293,7 @@
       <button class="cta" id="startBtn">Empezar a manejar</button>
       <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
         <button class="ghost" id="signsBtn">Señalamientos viales</button>
-        <a href="../index.html" class="ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px;">⬅ Portal de Inicio</a>
+        <a href="../index.html" class="ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px;">⬅ Portal SafeRoute</a>
       </div>
     `;
     overlay.classList.remove('hidden');
@@ -1337,7 +1337,7 @@
         <button class="ghost" id="changeSkinBtn">Cambiar de auto</button>
         <button class="ghost" id="infoBtn">¿Por qué este juego?</button>
         <button class="ghost" id="signsBtn">Señalamientos viales</button>
-        <a href="../index.html" class="ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px;">⬅ Portal VIALYS</a>
+        <a href="../index.html" class="ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px;">⬅ Portal SafeRoute</a>
       </div>
     `;
     overlay.classList.remove('hidden');
@@ -1352,13 +1352,13 @@
     overlay.innerHTML = `
       <h1>Sobre este juego</h1>
       <p style="text-align:left;">
-        Este simulador forma parte de la campaña de concientización del colectivo <b>VIALYS: Conectados con la vida, no con el celular</b>.<br><br>
+        Este simulador forma parte de <b>SafeRoute</b>, la campaña y plataforma de concientización desarrollada por el colectivo <b>VIALYS: Conectados con la vida, no con el celular</b>.<br><br>
         Cada notificación que aparecía en tu pantalla representa un mensaje, red social o llamada real que compite por tu atención mientras manejas. En la vida real no hay pausa ni reinicio: la Organización Mundial de la Salud señala que el uso del celular al volante afecta la atención visual, cognitiva y manual del conductor al mismo tiempo, aumentando drásticamente el riesgo de un choque fatal.<br><br>
         La próxima vez que manejes, deja el celular fuera de alcance, en silencio o en modo "No molestar mientras conduces". Ninguna notificación vale una vida.
       </p>
       <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
         <button class="cta" id="backBtn">Volver a jugar</button>
-        <a href="../index.html" class="ghost" style="text-decoration:none;display:inline-flex;align-items:center;padding:10px 18px;">Página de Inicio VIALYS</a>
+        <a href="../index.html" class="ghost" style="text-decoration:none;display:inline-flex;align-items:center;padding:10px 18px;">Página Principal SafeRoute</a>
       </div>
     `;
     document.getElementById('backBtn').addEventListener('click', startGame);
