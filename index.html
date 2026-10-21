@@ -1612,6 +1612,125 @@
         height: 540px;
       }
     }
+    /* ===== MEJORAS DE DISEÑO Y RESPONSIVO ===== */
+    :root {
+      --section-pad: clamp(56px, 9vw, 96px);
+      --gutter: clamp(16px, 4vw, 24px);
+    }
+
+    html { -webkit-text-size-adjust: 100%; scroll-padding-top: 76px; }
+    img, svg, video, iframe { max-width: 100%; }
+
+    section { padding: var(--section-pad) 0; }
+    .container, .nav-container { padding-left: var(--gutter); padding-right: var(--gutter); }
+
+    .hero-title { font-size: clamp(32px, 6.4vw, 60px); letter-spacing: -0.02em; }
+    .section-title { font-size: clamp(26px, 4.6vw, 40px); letter-spacing: -0.01em; }
+    .hero-subtitle, .section-desc { font-size: clamp(15px, 2.2vw, 18px); }
+
+    /* Accesibilidad: foco visible y objetivos táctiles cómodos */
+    a:focus-visible, button:focus-visible, input:focus-visible, .chip-btn:focus-visible, .flip-card:focus-visible {
+      outline: 2px solid var(--vialys-yellow);
+      outline-offset: 3px;
+    }
+    .btn, .chip-btn, .sim-tool-btn, .mobile-toggle, .nav-menu a { min-height: 44px; }
+    .btn { justify-content: center; }
+
+    /* Tarjetas con profundidad y elevación suave */
+    .distract-card, .calculator-box, .reaction-challenge-card, .about-card, .pledge-card, .pillar-box, .stat-item {
+      box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+    .distract-card, .pillar-box { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, background 0.3s; }
+    .distract-card:hover, .pillar-box:hover { transform: translateY(-4px); }
+
+    .hero-visual-card { max-width: 440px; margin-inline: auto; width: 100%; }
+    .btn-primary { box-shadow: 0 8px 24px -8px rgba(255, 204, 0, 0.55); }
+
+    /* Menú móvil como panel a pantalla completa bajo la barra */
+    .navbar { -webkit-backdrop-filter: blur(16px); }
+
+    /* Evita que contenido sin salto de línea ensanche las columnas del grid */
+    .hero-grid > *, .calc-layout > *, .sim-split-layout > *, .about-columns > *, .footer-grid > *, .distraction-grid > *, .myths-grid > *, .stats-grid > * { min-width: 0; }
+    .badge-pill { max-width: 100%; white-space: normal; text-align: left; line-height: 1.35; }
+
+    /* Tablet */
+    @media (max-width: 992px) {
+      .nav-menu { gap: 4px; }
+      .hero-section { padding: 48px 0 64px; }
+      .hero-visual-card { order: -1; max-width: 360px; }
+      .sim-top-bar { flex-wrap: wrap; gap: 10px; }
+      .about-header-flex { flex-wrap: wrap; gap: 16px; }
+      .footer-grid { gap: 28px; }
+    }
+
+    /* Celular */
+    @media (max-width: 768px) {
+      .brand-slogan { flex-wrap: wrap; gap: 4px 8px; font-size: 10px; }
+      .brand-logo-img { height: 40px; }
+      .nav-menu {
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        gap: 2px;
+        box-shadow: 0 24px 40px -12px rgba(0, 0, 0, 0.7);
+      }
+      .nav-menu li { width: 100%; }
+      .nav-menu a { display: flex; align-items: center; padding: 12px 14px; border-radius: var(--radius-sm); }
+      .nav-cta { justify-content: center; margin-top: 6px; }
+
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-actions .btn { width: 100%; }
+      .hero-visual-card { max-width: 320px; }
+
+      .stat-item, .distract-card, .pillar-box { padding: 20px; }
+      .calc-box, .calculator-box, .reaction-challenge-card, .about-card, .pledge-card { padding: 18px; }
+      .calc-layout { gap: 20px; }
+      .calc-extra-stats { grid-template-columns: 1fr; }
+      .blind-distance-val { font-size: clamp(40px, 14vw, 64px); }
+
+      .challenge-stage { min-height: 230px; padding: 16px; }
+      .traffic-light-box { height: 96px; }
+      .reaction-history { flex-wrap: wrap; gap: 8px; }
+
+      .myths-grid { gap: 14px; }
+      .flip-card { height: 250px; }
+
+      .sim-top-bar { padding: 12px; }
+      .sim-tools { width: 100%; }
+      .sim-tools { flex-wrap: wrap; }
+      .sim-tool-btn { flex: 1 1 auto; justify-content: center; white-space: normal; text-align: center; }
+      .sim-cabinet-frame { height: min(70vh, 520px); }
+      .sim-instructions-card { padding: 18px; }
+
+      .about-logos-cluster { flex-wrap: wrap; }
+      .about-big-logo { height: 72px; }
+      .pledge-form { flex-direction: column; }
+      .pledge-form .btn, .pledge-input { width: 100%; }
+      .digital-badge { padding: 16px; }
+
+      footer { padding: 44px 0 24px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    /* Celulares pequeños */
+    @media (max-width: 420px) {
+      .brand-slogan span:not(.brand-company-badge) { display: none; }
+      .speed-buttons-grid { gap: 8px; }
+      .chip-btn { padding: 10px 8px; }
+      .hero-title { font-size: 30px; }
+      .stat-number { font-size: 34px; }
+    }
+
+    /* Táctil: sin hover para voltear tarjetas (el JS usa click) */
+    @media (hover: none) {
+      .flip-card:hover .flip-card-inner { transform: none; }
+      .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+      .distract-card:hover, .pillar-box:hover { transform: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body>
@@ -2611,6 +2730,21 @@
         document.exitFullscreen();
       }
     });
+  </script>
+  <script src="vendor/motion.js"></script>
+  <script>
+    // Animaciones de entrada con Motion (se omiten si el usuario prefiere menos movimiento)
+    if (window.Motion && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const { animate, inView } = Motion;
+      animate('.hero-content > *', { opacity: [0, 1], y: [24, 0] }, { duration: 0.6, delay: Motion.stagger(0.1) });
+      animate('.hero-visual-card', { opacity: [0, 1], scale: [0.95, 1] }, { duration: 0.8, delay: 0.3 });
+      document.querySelectorAll('section:not(.hero-section) > *').forEach(el => {
+        el.style.opacity = 0;
+        inView(el, () => {
+          animate(el, { opacity: [0, 1], y: [30, 0] }, { duration: 0.6 });
+        }, { amount: 0.15 });
+      });
+    }
   </script>
 </body>
 </html>
