@@ -187,3 +187,43 @@
 .signIcon{height:58px;display:flex;align-items:center;justify-content:center;}
 .signName{font-family:var(--pixel-font);font-size:8px;line-height:1.6;color:var(--text);}
 .signMeaning{font-size:11.5px;line-height:1.4;color:var(--muted);}
+
+/* ---- Adaptación a celular ---- */
+html,body{height:100%;height:100dvh;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+#app{height:100vh;height:100dvh;}
+#gameArea{touch-action:none;-webkit-user-select:none;user-select:none;}
+.notif{width:min(200px,60%);}
+#overlay{overflow-y:auto;justify-content:safe center;padding:max(20px,env(safe-area-inset-top)) 20px max(20px,env(safe-area-inset-bottom));}
+#touchPad{
+  position:absolute;left:0;right:0;bottom:max(14px,env(safe-area-inset-bottom));
+  display:flex;justify-content:space-between;padding:0 16px;z-index:10;pointer-events:none;
+}
+#touchPad button{
+  pointer-events:auto;width:84px;height:68px;border-radius:14px;
+  background:rgba(20,22,28,.7);border:2px solid rgba(255,255,255,.25);
+  color:#fff;font-size:26px;touch-action:none;
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+}
+#touchPad button:active{background:rgba(61,220,151,.45);border-color:var(--accent2);}
+@media (hover:none),(pointer:coarse){
+  #controlsHint{bottom:92px;}
+}
+@media (max-width:480px){
+  #app{max-width:none;max-height:none;box-shadow:none;}
+  header{padding:8px 10px;}
+  header .stat{min-width:48px;}
+  header .stat b{font-size:11px;}
+  #meterWrap{margin:0 8px;}
+  #overlay{padding-left:14px;padding-right:14px;gap:12px;}
+  #overlay h1{font-size:15px;}
+  #overlay p,.rules,#factBox{font-size:12.5px;}
+  button.cta{padding:14px 20px;font-size:10px;min-height:48px;}
+  button.ghost{min-height:44px;}
+  #skinPicker{gap:6px;}
+}
+@media (max-height:520px) and (orientation:landscape){
+  header{padding:4px 12px;}
+  #overlay{padding-top:10px;padding-bottom:10px;gap:8px;}
+  #overlay h1{font-size:13px;}
+  #touchPad button{width:72px;height:56px;}
+}

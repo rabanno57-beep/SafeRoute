@@ -179,6 +179,19 @@
     touchStartX = null;
   });
 
+  // botones de dirección en pantalla para dispositivos táctiles
+  if(window.matchMedia && matchMedia('(hover: none), (pointer: coarse)').matches){
+    const pad = document.createElement('div');
+    pad.id = 'touchPad';
+    pad.innerHTML = '<button type="button" aria-label="Carril izquierdo">◀</button><button type="button" aria-label="Carril derecho">▶</button>';
+    gameArea.appendChild(pad);
+    pad.querySelectorAll('button').forEach((b,i)=>{
+      b.addEventListener('pointerdown', e=>{ e.preventDefault(); moveLane(i?1:-1); });
+    });
+    const hint = document.getElementById('controlsHint');
+    if(hint) hint.textContent = 'Desliza o usa ◀ ▶ para cambiar de carril';
+  }
+
   function moveLane(dir){
     if(!running) return;
     player.lane = Math.min(LANES-1, Math.max(0, player.lane+dir));
