@@ -11,7 +11,7 @@
   <!-- Tipografías Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -375,198 +375,6 @@
       background: rgba(255, 255, 255, 0.1);
       border-color: rgba(255, 204, 0, 0.4);
       transform: translateY(-3px);
-    }
-
-    /* MOCKUP VISUAL INTERACTIVO */
-    .hero-visual-card {
-      position: relative;
-      background: linear-gradient(180deg, #131622 0%, #0c0e14 100%);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-      overflow: hidden;
-    }
-
-    .hero-visual-card::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, transparent, var(--vialys-yellow), var(--vialys-red), transparent);
-    }
-
-    .phone-mockup {
-      background: #090b10;
-      border: 3px solid #232738;
-      border-radius: 28px;
-      padding: 16px;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-      max-width: 320px;
-      margin: 0 auto;
-    }
-
-    .phone-notch {
-      width: 100px;
-      height: 18px;
-      background: #151824;
-      border-radius: 0 0 12px 12px;
-      margin: -16px auto 14px;
-    }
-
-    .hero-dash-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #141724;
-      padding: 8px 12px;
-      border-radius: 8px;
-      margin-bottom: 14px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .speed-tag {
-      color: var(--vialys-yellow);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .danger-alert-pill {
-      background: rgba(255, 59, 59, 0.2);
-      border: 1px solid var(--vialys-red);
-      color: #ff6b6b;
-      padding: 3px 8px;
-      border-radius: var(--radius-full);
-      font-size: 11px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      animation: alertBlink 1s infinite alternate;
-    }
-
-    @keyframes alertBlink {
-      from { opacity: 0.6; }
-      to { opacity: 1; filter: drop-shadow(0 0 6px #ff3b3b); }
-    }
-
-    .simulated-notifs {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .mock-notif {
-      background: #171b28;
-      border: 1px solid #282f44;
-      border-left: 4px solid var(--vialys-yellow);
-      border-radius: 10px;
-      padding: 10px 12px;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      animation: floatNotif 3s ease-in-out infinite alternate;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .mock-notif:nth-child(2) {
-      border-left-color: #e1306c;
-      animation-delay: 1.5s;
-    }
-
-    .mock-notif:hover {
-      transform: scale(1.03);
-    }
-
-    @keyframes floatNotif {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-4px); }
-    }
-
-    .mock-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 2px;
-    }
-
-    .mock-content {
-      flex: 1;
-    }
-
-    .mock-sender {
-      font-size: 11px;
-      font-weight: 700;
-      color: #ffffff;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .mock-time {
-      color: var(--text-dim);
-      font-size: 10px;
-    }
-
-    .mock-msg {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .attention-gauge {
-      background: #111420;
-      border: 1px solid #232738;
-      border-radius: 12px;
-      padding: 12px;
-      text-align: center;
-    }
-
-    .gauge-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .gauge-bar-bg {
-      height: 12px;
-      background: #202436;
-      border-radius: 6px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .gauge-bar-fill {
-      height: 100%;
-      width: 18%;
-      background: linear-gradient(90deg, #ff3b3b, #ff7b2b);
-      box-shadow: 0 0 12px rgba(255, 59, 59, 0.7);
-      animation: attentionDrop 4s infinite alternate ease-in-out;
-    }
-
-    @keyframes attentionDrop {
-      0% { width: 85%; background: linear-gradient(90deg, #10b981, #ffcc00); }
-      40% { width: 50%; background: linear-gradient(90deg, #ffcc00, #f59e0b); }
-      100% { width: 14%; background: linear-gradient(90deg, #ff3b3b, #ff0000); }
-    }
-
-    .gauge-warning {
-      color: #ff4d4d;
-      font-size: 11px;
-      font-weight: 700;
-      margin-top: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
     }
 
     /* ESTADÍSTICAS EN CINTA */
@@ -1727,6 +1535,605 @@
       .distract-card:hover, .pillar-box:hover { transform: none; }
     }
 
+    /* ===== REDISEÑO: MÁS ATRACTIVO Y ANIMADO (los logos no se modifican) ===== */
+
+    /* Barra de progreso de lectura */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--vialys-green), var(--vialys-yellow), var(--vialys-red));
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      z-index: 200;
+      pointer-events: none;
+      box-shadow: 0 0 12px rgba(255, 204, 0, 0.6);
+    }
+
+    /* Orbes de luz que flotan en el fondo */
+    .bg-orbs {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .bg-orbs span {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.35;
+      animation: orbFloat 22s ease-in-out infinite alternate;
+    }
+
+    .bg-orbs span:nth-child(1) { width: 420px; height: 420px; background: rgba(255, 204, 0, 0.35); top: -120px; left: 55%; }
+    .bg-orbs span:nth-child(2) { width: 360px; height: 360px; background: rgba(255, 59, 59, 0.28); top: 45%; left: -120px; animation-duration: 28s; animation-delay: -6s; }
+    .bg-orbs span:nth-child(3) { width: 300px; height: 300px; background: rgba(6, 182, 212, 0.22); bottom: -100px; right: -60px; animation-duration: 25s; animation-delay: -12s; }
+
+    @keyframes orbFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, 40px) scale(1.12); }
+      100% { transform: translate(-40px, 80px) scale(0.95); }
+    }
+
+    /* Navbar: se compacta y gana sombra al hacer scroll */
+    .navbar.scrolled {
+      background: rgba(8, 9, 13, 0.92);
+      box-shadow: 0 12px 30px -16px rgba(0, 0, 0, 0.9);
+      border-bottom-color: rgba(255, 204, 0, 0.18);
+    }
+
+    .navbar.scrolled .nav-container { padding-top: 8px; padding-bottom: 8px; }
+    .nav-container { transition: padding 0.3s ease; }
+
+    .nav-menu a:not(.nav-cta)::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: -4px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--vialys-yellow);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-menu a:not(.nav-cta):hover::after,
+    .nav-menu a.active::after { transform: scaleX(1); }
+    .nav-menu a.active { color: var(--vialys-yellow); }
+
+    .nav-cta { animation: ctaGlow 2.8s ease-in-out infinite; }
+
+    @keyframes ctaGlow {
+      0%, 100% { box-shadow: 0 4px 14px rgba(255, 204, 0, 0.3); }
+      50% { box-shadow: 0 4px 26px rgba(255, 204, 0, 0.65); }
+    }
+
+    /* Botón principal con destello */
+    .btn-primary { position: relative; overflow: hidden; isolation: isolate; }
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0; left: -60%;
+      width: 40%;
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: -1;
+    }
+    .btn-primary:hover::after { left: 130%; }
+    .btn:active { transform: translateY(0) scale(0.97); }
+
+    /* Cinta de estadísticas en tarjetas */
+    .stats-ribbon {
+      background: linear-gradient(180deg, #0d0f16, #0a0b11);
+      position: relative;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
+    }
+
+    .stat-item:hover { transform: translateY(-4px); border-color: rgba(255, 204, 0, 0.4); }
+
+    .stat-number {
+      background: linear-gradient(180deg, #fff1a8, var(--vialys-yellow) 55%, var(--vialys-amber));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: none;
+      filter: drop-shadow(0 0 16px rgba(255, 204, 0, 0.25));
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Foco de luz que sigue al cursor en tarjetas */
+    .distract-card, .pillar-box, .sim-instructions-card, .calc-results-wrap {
+      background-image: radial-gradient(420px circle at var(--mx, 50%) var(--my, -30%), rgba(255, 204, 0, 0.09), transparent 45%);
+    }
+
+    .distract-card::before {
+      background: linear-gradient(90deg, var(--vialys-yellow), var(--vialys-red));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .distract-card:hover::before { background: linear-gradient(90deg, var(--vialys-yellow), var(--vialys-red)); transform: scaleX(1); }
+
+    .distract-icon-wrap { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s; }
+    .distract-card:hover .distract-icon-wrap {
+      transform: translateY(-4px) rotate(-8deg) scale(1.1);
+      box-shadow: 0 10px 26px rgba(255, 204, 0, 0.25);
+    }
+
+    /* Calculadora */
+    .chip-btn { position: relative; }
+    .chip-btn:hover { transform: translateY(-2px); }
+    .chip-btn.active { box-shadow: 0 0 0 1px var(--vialys-yellow), 0 8px 22px -8px rgba(255, 204, 0, 0.5); }
+    .road-blind-fill { transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1); background-size: 28px 28px; animation: hazardSlide 0.8s linear infinite; }
+
+    @keyframes hazardSlide {
+      to { background-position: 28px 0; }
+    }
+
+    .car-marker-svg { animation: carBob 0.5s ease-in-out infinite alternate; }
+
+    @keyframes carBob {
+      to { transform: translateY(-1.5px); }
+    }
+
+    /* Mitos: brillo al voltear */
+    .flip-card-back { box-shadow: 0 0 40px -12px rgba(255, 204, 0, 0.35); }
+    .flip-card-front { transition: border-color 0.3s; }
+    .flip-card:hover .flip-card-front { border-color: rgba(255, 204, 0, 0.4); }
+
+    /* Cabina del simulador con borde luminoso */
+    .sim-cabinet-frame { animation: cabinetGlow 3.5s ease-in-out infinite; }
+
+    @keyframes cabinetGlow {
+      0%, 100% { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 18px rgba(255, 204, 0, 0.12); border-color: #1f2334; }
+      50% { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 38px rgba(255, 204, 0, 0.32); border-color: rgba(255, 204, 0, 0.35); }
+    }
+
+    .key-badge { box-shadow: 0 2px 0 #0b0d14; }
+
+    /* Compromiso */
+    .pledge-card { position: relative; overflow: hidden; }
+    .pledge-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(255, 204, 0, 0.12), transparent 60%);
+      pointer-events: none;
+    }
+    .pledge-card > * { position: relative; }
+    .pledge-input:focus { box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.15); }
+
+    footer { position: relative; }
+    footer::before {
+      content: "";
+      position: absolute;
+      top: -1px; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--vialys-yellow), transparent);
+    }
+
+    @media (max-width: 768px) {
+      .bg-orbs span { filter: blur(70px); opacity: 0.25; }
+    }
+
+    /* ===== ESTILO INSPIRADO EN MODO AVIÓN ===== */
+    :root {
+      --font-display: 'Space Grotesk', 'Arial Narrow', sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --font-main: var(--font-body);
+      --ink: #f4f5f2;
+      --line: #2a2e36;
+    }
+
+    body { -webkit-font-smoothing: antialiased; }
+    ::selection { background: var(--vialys-yellow); color: #0a0b0d; }
+
+    /* La marca "SafeRoute" junto al logo conserva su tipografía original */
+    .brand-title { font-family: 'Outfit', sans-serif; }
+
+    .hero-title, .section-title, .about-intro-title, .stat-number, .distract-card h3,
+    .pledge-card h3, .flip-card-front h3, .stage-title, .blind-distance-val, .sim-instructions-card h4 {
+      font-family: var(--font-display);
+    }
+
+    .nav-menu a:not(.nav-cta) {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-menu { gap: 18px; }
+    .nav-menu a, .brand-slogan span, .brand-company-badge { white-space: nowrap; }
+
+    @media (max-width: 1200px) and (min-width: 769px) {
+      .nav-menu { gap: 12px; }
+      .nav-menu a:not(.nav-cta) { font-size: 10px; letter-spacing: 0.04em; }
+      .brand-slogan > span:not(.brand-company-badge) { display: none; }
+    }
+
+    /* Botones tipo píldora */
+    .btn, .nav-cta {
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 14px;
+    }
+
+    .btn-primary { background: var(--vialys-yellow); }
+    .btn-primary, .nav-cta {
+      transition: transform 0.25s, box-shadow 0.25s, filter 0.2s, translate 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .btn-primary:hover { filter: brightness(1.1); }
+    .btn-secondary { background: transparent; border: 1px solid rgba(244, 245, 242, 0.35); backdrop-filter: none; }
+    .btn-secondary:hover { background: transparent; border-color: var(--vialys-yellow); color: var(--vialys-yellow); }
+
+    /* Hero */
+    .hero-section {
+      min-height: min(calc(100vh - 70px), 960px);
+      min-height: min(calc(100dvh - 70px), 960px);
+      display: flex;
+      flex-direction: column;
+      padding: 56px 0 0;
+      isolation: isolate;
+    }
+
+    .hero-section > .container { flex: 1; display: flex; align-items: center; width: 100%; }
+    .hero-grid { grid-template-columns: 1.25fr 1fr; width: 100%; }
+
+    .hero-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero-glow-a { width: 34rem; height: 34rem; right: -10rem; top: 2rem; background: rgba(255, 204, 0, 0.12); animation: breathe 6s ease-in-out infinite; }
+    .hero-glow-b { width: 28rem; height: 28rem; left: -10rem; bottom: 0; background: rgba(123, 123, 255, 0.1); }
+
+    @keyframes breathe {
+      50% { transform: scale(1.18); opacity: 0.55; }
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--vialys-yellow);
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 6.2vw, 4.6rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+
+    .hero-subtitle { color: #a3a8b0; font-size: 17px; }
+
+    /* Titulares cinéticos: suben palabra por palabra */
+    .accent { color: var(--vialys-yellow); }
+    .kinetic .kw { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.08em; }
+    .kinetic .kw-i {
+      display: inline-block;
+      transform: translateY(110%);
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: calc(var(--i) * 50ms);
+    }
+    .kinetic.in .kw-i { transform: none; }
+
+    /* Celular del hero */
+    .hero-phone-wrap { position: relative; will-change: transform; }
+    .hero-phone-float { animation: phoneFloat 7s ease-in-out infinite; }
+
+    @keyframes phoneFloat {
+      50% { transform: translateY(-14px); }
+    }
+
+    .phone-frame {
+      position: relative;
+      width: 100%;
+      max-width: 290px;
+      aspect-ratio: 9 / 18.5;
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 2.6rem;
+      background: #1c1f25;
+      border: 1px solid var(--line);
+      box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.04) inset, 0 0 60px -20px rgba(255, 204, 0, 0.25);
+    }
+
+    .phone-screen {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 2.05rem;
+      background: #0a0b0d;
+      display: flex;
+      flex-direction: column;
+      padding: 12px 12px 16px;
+    }
+
+    .grain::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.06;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    }
+
+    .phone-island {
+      position: absolute;
+      left: 50%; top: 8px;
+      width: 80px; height: 20px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: #000;
+      z-index: 3;
+    }
+
+    .phone-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+      height: 20px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .phone-status-icons { display: flex; align-items: center; gap: 5px; }
+    .phone-status-icons svg { height: 10px; width: auto; }
+
+    .phone-lock { text-align: center; margin: 22px 0 16px; }
+
+    .phone-clock {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .phone-sub {
+      margin-top: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #a3a8b0;
+    }
+
+    .phone-notifs {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .notif-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 16px;
+      background: rgba(28, 31, 37, 0.95);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+      text-align: left;
+    }
+
+    .notif-icon {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      color: #0a0b0d;
+    }
+
+    .notif-icon svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .notif-text { min-width: 0; flex: 1; }
+    .notif-app { display: block; font-family: var(--font-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.08em; color: #a3a8b0; }
+    .notif-title { display: block; font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .notif-body { display: block; font-size: 11.5px; color: #a3a8b0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .phone-bottom { margin-top: 10px; }
+
+    .phone-gauge {
+      padding: 10px;
+      border-radius: 14px;
+      background: #14161a;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
+    }
+
+    .phone-gauge-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #a3a8b0;
+    }
+
+    .phone-gauge-label b { color: var(--vialys-yellow); transition: color 0.4s; }
+    .phone-gauge-bar { height: 6px; border-radius: 6px; background: #262a33; overflow: hidden; }
+
+    .phone-gauge-fill {
+      height: 100%;
+      width: 92%;
+      border-radius: inherit;
+      background: var(--vialys-green);
+      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1), background 0.6s;
+    }
+
+    .phone-count {
+      margin-top: 8px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--vialys-yellow);
+    }
+
+    .scroll-cue {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-height: 48px;
+      margin: 8px auto 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #a3a8b0;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .scroll-cue:hover { color: var(--vialys-yellow); }
+    .scroll-cue svg { animation: blink 1.6s steps(2, jump-none) infinite; }
+
+    @keyframes blink {
+      50% { opacity: 0.25; }
+    }
+
+    /* Cinta sólida en movimiento */
+    .hero-marquee {
+      overflow: hidden;
+      padding: 12px 0;
+      background: var(--vialys-yellow);
+      color: #0a0b0d;
+      border-block: 1px solid var(--line);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-track span {
+      flex-shrink: 0;
+      padding-right: 0.4em;
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    @keyframes marquee {
+      to { transform: translateX(-50%); }
+    }
+
+    /* Encabezados de sección editoriales con número grande */
+    .section-header {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 48px;
+      max-width: none;
+      margin: 0 0 64px;
+      text-align: left;
+      align-items: start;
+    }
+
+    .section-index {
+      font-family: var(--font-display);
+      font-size: clamp(4.5rem, 10vw, 8rem);
+      font-weight: 700;
+      line-height: 0.8;
+      color: var(--line);
+      -webkit-text-stroke: 1px rgba(255, 204, 0, 0.15);
+      transition: color 0.6s;
+    }
+
+    .section-header.in .section-index { color: #2f333c; }
+
+    .section-tag {
+      display: flex;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5.2vw, 4rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc { max-width: 680px; color: #a3a8b0; margin-top: 20px; }
+
+    /* Íconos */
+    .distract-icon-wrap { color: var(--vialys-yellow); }
+    .distract-icon-wrap svg { width: 28px; height: 28px; }
+    .distract-card .consequence svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    .stat-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 40px; height: 40px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      background: rgba(255, 204, 0, 0.1);
+      border: 1px solid rgba(255, 204, 0, 0.25);
+      color: var(--vialys-yellow);
+    }
+
+    .stat-icon svg { width: 20px; height: 20px; }
+
+    /* Trazo que se dibuja al entrar en pantalla */
+    .draw-ready * { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.3s cubic-bezier(0.65, 0, 0.35, 1); }
+    .draw-ready.drawn * { stroke-dashoffset: 0; }
+
+    @media (max-width: 992px) {
+      .hero-grid { text-align: left; grid-template-columns: 1fr; }
+      .hero-subtitle { margin: 0 0 34px; }
+      .hero-actions { justify-content: flex-start; }
+      .hero-section { min-height: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .section-header { grid-template-columns: 1fr; gap: 12px; margin-bottom: 40px; }
+      .phone-frame { max-width: 260px; }
+      .marquee-track span { font-size: 15px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -1735,7 +2142,9 @@
 </head>
 <body>
 
+  <div class="scroll-progress" id="scrollProgress"></div>
   <div class="road-grid-bg"></div>
+  <div class="bg-orbs" aria-hidden="true"><span></span><span></span><span></span></div>
 
   <!-- NAVEGACIÓN -->
   <header class="navbar">
@@ -1779,97 +2188,74 @@
     </div>
   </header>
 
-  <!-- SECCIÓN HERO -->
+  <!-- SECCIÓN HERO (celular inspirado en Modo Avión) -->
   <section class="hero-section" id="inicio">
+    <div class="hero-glow hero-glow-a" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
     <div class="container">
       <div class="hero-grid">
         <div class="hero-content">
-          <div class="badge-pill">
-            <span class="pulse-dot"></span>
-            SafeRoute • Campaña Oficial de Colectivo VIALYS
-          </div>
-          <h1 class="hero-title">
-            SafeRoute: <br>
-            Conectados con la vida, <br>
-            <span class="text-yellow">no con el celular.</span>
-          </h1>
+          <p class="hero-kicker">
+            <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="3.2"/><line x1="2.5" y1="12" x2="8.8" y2="12"/><line x1="15.2" y1="12" x2="21.5" y2="12"/><line x1="12" y1="15.2" x2="12" y2="21.5"/></svg>
+            <span>SafeRoute · Campaña oficial de Colectivo VIALYS</span>
+          </p>
+          <h1 class="hero-title kinetic">SafeRoute: conectados con la vida, <span class="accent">no con el celular.</span></h1>
           <p class="hero-subtitle">
             SafeRoute es la plataforma interactiva de concientización y educación vial juvenil desarrollada por el <strong>Colectivo VIALYS</strong>. Un segundo para responder un mensaje, toda una vida para lamentarlo. Antes de salir a la calle, descubre la ciencia detrás de la distracción, pon a prueba tus reflejos y experimenta el peligro real en nuestro simulador oficial.
           </p>
           <div class="hero-actions">
             <a href="#simulador" class="btn btn-primary">
-              <svg class="v-icon v-icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="9.5"/>
-                <circle cx="12" cy="12" r="3.2"/>
-                <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
-                <line x1="2.5" y1="12" x2="8.8" y2="12"/>
-                <line x1="15.2" y1="12" x2="21.5" y2="12"/>
-                <line x1="12" y1="15.2" x2="12" y2="21.5"/>
-              </svg>
-              <span>Entrar al Simulador SafeRoute</span>
+              <svg class="v-icon v-icon-md" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="3.2"/><line x1="2.5" y1="12" x2="8.8" y2="12"/><line x1="15.2" y1="12" x2="21.5" y2="12"/><line x1="12" y1="15.2" x2="12" y2="21.5"/></svg>
+              <span>Entrar al simulador</span>
             </a>
             <a href="#calculadora" class="btn btn-secondary">
-              <svg class="v-icon v-icon-md v-icon-yellow" viewBox="0 0 24 24"><path d="M12 14v4M3.34 19a10 10 0 1 1 17.32 0M9 9l3 3"/></svg>
-              <span>Calcular Metros a Ciegas</span>
+              <svg class="v-icon v-icon-md" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
+              <span>Calcular metros a ciegas</span>
             </a>
           </div>
         </div>
 
-        <!-- MOCKUP VISUAL INTERACTIVO -->
-        <div class="hero-visual-card">
-          <div class="phone-mockup">
-            <div class="phone-notch"></div>
-            <div class="hero-dash-info">
-              <span class="speed-tag">
-                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M12 14v4M3.34 19a10 10 0 1 1 17.32 0M9 9l3 3"/></svg>
-                <span>60 km/h</span>
-              </span>
-              <span class="danger-alert-pill">
-                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                <span>DISTRACCIÓN CRÍTICA</span>
-              </span>
-            </div>
-
-            <div class="simulated-notifs">
-              <div class="mock-notif">
-                <div class="mock-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.63C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.16C10.56 20.16 9.1 19.76 7.83 19.01L7.53 18.83L4.41 19.65L5.24 16.61L5.04 16.3C4.22 14.99 3.78 13.47 3.78 11.91C3.78 7.36 7.49 3.65 12.04 3.65C14.25 3.65 16.32 4.51 17.88 6.07C19.44 7.63 20.3 9.7 20.3 11.91C20.3 16.47 16.59 20.16 12.05 20.16Z"/></svg>
+        <div class="hero-phone-wrap" id="heroPhoneWrap">
+          <div class="hero-phone-float">
+            <div class="phone-frame" role="group" aria-label="Celular simulado que recibe notificaciones mientras conduces">
+              <div class="phone-screen grain">
+                <div class="phone-island" aria-hidden="true"></div>
+                <div class="phone-status" aria-hidden="true">
+                  <span class="phone-status-time">11:47</span>
+                  <span class="phone-status-icons">
+                    <svg viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                    <svg viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="3" stroke="currentColor" opacity="0.5"/><rect x="2.5" y="2.5" width="9" height="7" rx="1.5" fill="#ff3b3b"/><rect x="24" y="4" width="1.5" height="4" rx="0.75" fill="currentColor" opacity="0.5"/></svg>
+                  </span>
                 </div>
-                <div class="mock-content">
-                  <div class="mock-sender">
-                    WhatsApp <span>ahora</span>
+                <div class="phone-lock">
+                  <p class="phone-clock" id="phoneClock">11:47</p>
+                  <p class="phone-sub">Vas a 60 km/h · no lo mires</p>
+                </div>
+                <ul class="phone-notifs" id="phoneNotifs" aria-hidden="true"></ul>
+                <div class="phone-bottom" aria-hidden="true">
+                  <div class="phone-gauge">
+                    <div class="phone-gauge-label"><span>Atención al camino</span><b id="attentionPct">92%</b></div>
+                    <div class="phone-gauge-bar"><div class="phone-gauge-fill" id="attentionFill"></div></div>
                   </div>
-                  <div class="mock-msg">"¿Dónde vienes? ¡Ya arrancó la fiesta!"</div>
+                  <p class="phone-count"><span id="notifCount">3</span> notificaciones nuevas</p>
                 </div>
-              </div>
-              <div class="mock-notif">
-                <div class="mock-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#E1306C" stroke-width="2"/><circle cx="12" cy="12" r="4.5" stroke="#E1306C" stroke-width="2"/><circle cx="18" cy="6" r="1.2" fill="#E1306C"/></svg>
-                </div>
-                <div class="mock-content">
-                  <div class="mock-sender">
-                    Instagram <span>hace 1m</span>
-                  </div>
-                  <div class="mock-msg">@amigo te etiquetó en una historia</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="attention-gauge">
-              <div class="gauge-label">
-                <span>Atención al camino</span>
-                <span style="color:#ff4d4d;font-weight:900;">14%</span>
-              </div>
-              <div class="gauge-bar-bg">
-                <div class="gauge-bar-fill"></div>
-              </div>
-              <div class="gauge-warning">
-                <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
-                <span>Visión periférica bloqueada</span>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <a href="#peligro" class="scroll-cue" aria-label="Desplazarse a la siguiente sección">
+      Desliza
+      <svg class="v-icon v-icon-md" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+    </a>
+
+    <div class="hero-marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Ojos en el camino — Conectados con la vida — Suelta el celular — Ningún mensaje vale una vida — </span>
+        <span>Ojos en el camino — Conectados con la vida — Suelta el celular — Ningún mensaje vale una vida — </span>
       </div>
     </div>
   </section>
@@ -1879,21 +2265,25 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item">
+          <span class="stat-icon"><svg class="v-icon draw" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
           <div class="stat-number">400%</div>
           <div class="stat-title">Mayor riesgo de choque</div>
           <div class="stat-desc">según la Organización Mundial de la Salud (OMS).</div>
         </div>
         <div class="stat-item">
+          <span class="stat-icon"><svg class="v-icon draw" viewBox="0 0 24 24"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg></span>
           <div class="stat-number">80 m</div>
           <div class="stat-title">Recorridos a ciegas</div>
           <div class="stat-desc">en los 5 segundos que tardas en leer un WhatsApp.</div>
         </div>
         <div class="stat-item">
+          <span class="stat-icon"><svg class="v-icon draw" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg></span>
           <div class="stat-number">#1</div>
           <div class="stat-title">Causa de muerte accidental</div>
           <div class="stat-desc">en jóvenes de entre 15 y 29 años en carretera.</div>
         </div>
         <div class="stat-item">
+          <span class="stat-icon"><svg class="v-icon draw" viewBox="0 0 24 24"><line x1="10" y1="2" x2="14" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/></svg></span>
           <div class="stat-number">27 s</div>
           <div class="stat-title">Atención residual</div>
           <div class="stat-desc">tarda tu mente en reenfocarse tras soltar el celular.</div>
@@ -1906,66 +2296,73 @@
   <section id="peligro">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">
-          <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          La Amenaza Invisible
-        </span>
-        <h2 class="section-title">¿Por qué la Tecnodependencia es mortal al volante?</h2>
-        <p class="section-desc">
-          No se trata de falta de habilidad para manejar. El cerebro humano está condicionado a buscar la dopamina de cada notificación. Al volante, el teléfono desata <b>4 tipos de distracciones letales</b> al mismo instante.
-        </p>
+        <span class="section-index" aria-hidden="true">01</span>
+        <div>
+          <span class="section-tag">
+            <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            La Amenaza Invisible
+          </span>
+          <h2 class="section-title kinetic">¿Por qué la Tecnodependencia es <span class="accent">mortal al volante?</span></h2>
+          <p class="section-desc">
+            No se trata de falta de habilidad para manejar. El cerebro humano está condicionado a buscar la dopamina de cada notificación. Al volante, el teléfono desata <b>4 tipos de distracciones letales</b> al mismo instante.
+          </p>
+        </div>
       </div>
 
       <div class="distraction-grid">
         <div class="distract-card">
           <div class="distract-icon-wrap">
-            👁️
+            <svg class="v-icon draw" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
           </div>
           <h3>Distracción Visual</h3>
           <p>
             Apartas los ojos del camino. Mirar la pantalla apenas 3 segundos equivale a cruzar media cuadra con una venda en los ojos sin ver peatones ni semáforos.
           </p>
           <div class="consequence">
-            <span>⚠️ Pierdes el 90% del campo visual</span>
+            <svg class="v-icon" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+            <span>Pierdes el 90% del campo visual</span>
           </div>
         </div>
 
         <div class="distract-card">
           <div class="distract-icon-wrap">
-            🖐️
+            <svg class="v-icon draw" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
           </div>
           <h3>Distracción Manual</h3>
           <p>
             Retiras una o ambas manos del volante para teclear, sostener o deslizar. Si un auto frena o un bache aparece, no tienes tiempo físico para girar.
           </p>
           <div class="consequence">
-            <span>⚠️ Reduce tu capacidad de maniobra en 80%</span>
+            <svg class="v-icon" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+            <span>Reduce tu capacidad de maniobra en 80%</span>
           </div>
         </div>
 
         <div class="distract-card">
           <div class="distract-icon-wrap">
-            🧠
+            <svg class="v-icon draw" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg>
           </div>
           <h3>Distracción Cognitiva</h3>
           <p>
             Tu cerebro procesa emociones, respuestas y textos en lugar de anticipar el tráfico. Esto provoca <i>ceguera por inatención</i>: ves la luz roja pero tu mente no frena.
           </p>
           <div class="consequence">
-            <span>⚠️ Tiempo de reacción triplicado</span>
+            <svg class="v-icon" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+            <span>Tiempo de reacción triplicado</span>
           </div>
         </div>
 
         <div class="distract-card">
           <div class="distract-icon-wrap">
-            👂
+            <svg class="v-icon draw" viewBox="0 0 24 24"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>
           </div>
           <h3>Distracción Auditiva</h3>
           <p>
             Audífonos, llamadas o música a alto volumen cancelan los sonidos del entorno vial: bocinas de emergencia, sirenas de ambulancias o rechinido de llantas.
           </p>
           <div class="consequence">
-            <span>⚠️ Aislamiento acústico de alarmas</span>
+            <svg class="v-icon" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+            <span>Aislamiento acústico de alarmas</span>
           </div>
         </div>
       </div>
@@ -1976,14 +2373,17 @@
   <section id="calculadora" style="background:#0b0d14;">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">
-          <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M12 14v4M3.34 19a10 10 0 1 1 17.32 0M9 9l3 3"/></svg>
-          Simulador Científico
-        </span>
-        <h2 class="section-title">Calculadora de "Metros a Ciegas"</h2>
-        <p class="section-desc">
-          Selecciona tu velocidad y lo que crees que es una "revisión inofensiva" de tu celular. Descubre cuántos metros avanzas sin control de la realidad.
-        </p>
+        <span class="section-index" aria-hidden="true">02</span>
+        <div>
+          <span class="section-tag">
+            <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M12 14v4M3.34 19a10 10 0 1 1 17.32 0M9 9l3 3"/></svg>
+            Simulador Científico
+          </span>
+          <h2 class="section-title kinetic">Calculadora de <span class="accent">"Metros a Ciegas"</span></h2>
+          <p class="section-desc">
+            Selecciona tu velocidad y lo que crees que es una "revisión inofensiva" de tu celular. Descubre cuántos metros avanzas sin control de la realidad.
+          </p>
+        </div>
       </div>
 
       <div class="calculator-box">
@@ -2058,7 +2458,7 @@
             </div>
 
             <div class="real-world-comparison" id="realWorldComp">
-              <svg class="v-icon-lg v-icon-yellow" viewBox="0 0 24 24"><path d="M2 12c0-4.4 4.5-8 10-8s10 3.6 10 8-4.5 8-10 8-10-3.6-10-8Z"/><path d="M7 12c0-2.2 2.2-4 5-4s5 1.8 5 4-2.2 4-5 4-5-1.8-5-4Z"/><line x1="12" y1="4" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="20"/></svg>
+              <svg class="v-icon v-icon-lg v-icon-yellow" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
               <span id="compText">¡Es casi <b>1 cancha de fútbol profesional completa (105m)</b> conduciendo con los ojos vendados!</span>
             </div>
 
@@ -2082,14 +2482,17 @@
   <section id="reflejos">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">
-          <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Desafío Interactivo
-        </span>
-        <h2 class="section-title">El Mito del Multitasking: Pon a prueba tus reflejos</h2>
-        <p class="section-desc">
-          ¿Crees que puedes reaccionar a tiempo mientras te distrae un teléfono? Haz clic en la caja tan pronto como la luz del semáforo cambie a <b>VERDE</b>.
-        </p>
+        <span class="section-index" aria-hidden="true">03</span>
+        <div>
+          <span class="section-tag">
+            <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Desafío Interactivo
+          </span>
+          <h2 class="section-title kinetic">El Mito del Multitasking: <span class="accent">Pon a prueba tus reflejos</span></h2>
+          <p class="section-desc">
+            ¿Crees que puedes reaccionar a tiempo mientras te distrae un teléfono? Haz clic en la caja tan pronto como la luz del semáforo cambie a <b>VERDE</b>.
+          </p>
+        </div>
       </div>
 
       <div class="reaction-challenge-card">
@@ -2123,14 +2526,17 @@
   <section id="mitos" style="background:#0b0d14;">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">
-          <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Desarmando Creencias
-        </span>
-        <h2 class="section-title">Mitos Juveniles vs. Realidad Médica</h2>
-        <p class="section-desc">
-          Pasa el cursor o toca cada tarjeta para descubrir por qué las excusas comunes al volante no se sostienen ante la física.
-        </p>
+        <span class="section-index" aria-hidden="true">04</span>
+        <div>
+          <span class="section-tag">
+            <svg class="v-icon v-icon-sm" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Desarmando Creencias
+          </span>
+          <h2 class="section-title kinetic">Mitos Juveniles vs. <span class="accent">Realidad Médica</span></h2>
+          <p class="section-desc">
+            Pasa el cursor o toca cada tarjeta para descubrir por qué las excusas comunes al volante no se sostienen ante la física.
+          </p>
+        </div>
       </div>
 
       <div class="myths-grid">
@@ -2241,20 +2647,23 @@
   <section class="simulator-section" id="simulador">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">
-          <svg class="v-icon v-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9.5"/>
-            <circle cx="12" cy="12" r="3.2"/>
-            <line x1="2.5" y1="12" x2="8.8" y2="12"/>
-            <line x1="15.2" y1="12" x2="21.5" y2="12"/>
-            <line x1="12" y1="15.2" x2="12" y2="21.5"/>
-          </svg>
-          Experiencia Práctica
-        </span>
-        <h2 class="section-title">Simulador SafeRoute: Distracción Fatal</h2>
-        <p class="section-desc">
-          Tecnología y experiencia interactiva desarrollada por el <b>Colectivo VIALYS</b>. Ponte al volante en un entorno seguro antes de salir a la vida real. Intenta mantener tu vehículo en el carril mientras te bombardean notificaciones continuas. ¿Podrás sobrevivir?
-        </p>
+        <span class="section-index" aria-hidden="true">05</span>
+        <div>
+          <span class="section-tag">
+            <svg class="v-icon v-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9.5"/>
+              <circle cx="12" cy="12" r="3.2"/>
+              <line x1="2.5" y1="12" x2="8.8" y2="12"/>
+              <line x1="15.2" y1="12" x2="21.5" y2="12"/>
+              <line x1="12" y1="15.2" x2="12" y2="21.5"/>
+            </svg>
+            Experiencia Práctica
+          </span>
+          <h2 class="section-title kinetic">Simulador SafeRoute: <span class="accent">Distracción Fatal</span></h2>
+          <p class="section-desc">
+            Tecnología y experiencia interactiva desarrollada por el <b>Colectivo VIALYS</b>. Ponte al volante en un entorno seguro antes de salir a la vida real. Intenta mantener tu vehículo en el carril mientras te bombardean notificaciones continuas. ¿Podrás sobrevivir?
+          </p>
+        </div>
       </div>
 
       <div class="simulator-wrapper">
@@ -2334,7 +2743,7 @@
           </div>
           <div>
             <span class="about-company-tag">Empresa & Colectivo Creador</span>
-            <h2 class="about-intro-title">Conoce al Colectivo VIALYS</h2>
+            <h2 class="about-intro-title kinetic">Conoce al Colectivo VIALYS</h2>
             <div class="about-slogan-tag">"Conectados con la vida, no con el celular" — Los creadores de la iniciativa SafeRoute</div>
           </div>
         </div>
@@ -2733,17 +3142,304 @@
   </script>
   <script src="vendor/motion.js"></script>
   <script>
-    // Animaciones de entrada con Motion (se omiten si el usuario prefiere menos movimiento)
-    if (window.Motion && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const { animate, inView } = Motion;
-      animate('.hero-content > *', { opacity: [0, 1], y: [24, 0] }, { duration: 0.6, delay: Motion.stagger(0.1) });
-      animate('.hero-visual-card', { opacity: [0, 1], scale: [0.95, 1] }, { duration: 0.8, delay: 0.3 });
-      document.querySelectorAll('section:not(.hero-section) > *').forEach(el => {
+    // ----------------------------------------------------
+    // BARRA DE PROGRESO, NAVBAR Y ENLACE ACTIVO
+    // ----------------------------------------------------
+    const scrollProgress = document.getElementById('scrollProgress');
+    const navbar = document.querySelector('.navbar');
+    let scrollTicking = false;
+
+    function onScroll() {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      scrollProgress.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+      navbar.classList.toggle('scrolled', scrollY > 20);
+      scrollTicking = false;
+    }
+
+    addEventListener('scroll', () => {
+      if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(onScroll); }
+    }, { passive: true });
+    onScroll();
+
+    const navLinks = document.querySelectorAll('.nav-menu a:not(.nav-cta)');
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('section[id]').forEach(s => sectionObserver.observe(s));
+
+    // Foco de luz que sigue al cursor dentro de las tarjetas
+    document.querySelectorAll('.distract-card, .pillar-box, .sim-instructions-card, .calc-results-wrap').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ----------------------------------------------------
+    // TITULARES CINÉTICOS: cada palabra sube al entrar en pantalla
+    // ----------------------------------------------------
+    function splitWords(node, counter) {
+      [...node.childNodes].forEach(child => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach(part => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+            const outer = document.createElement('span');
+            outer.className = 'kw';
+            outer.setAttribute('aria-hidden', 'true');
+            const inner = document.createElement('span');
+            inner.className = 'kw-i';
+            inner.style.setProperty('--i', counter.n++);
+            inner.textContent = part;
+            outer.appendChild(inner);
+            frag.appendChild(outer);
+          });
+          child.replaceWith(frag);
+        } else if (child.nodeType === Node.ELEMENT_NODE) {
+          splitWords(child, counter);
+        }
+      });
+    }
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+
+    document.querySelectorAll('.kinetic').forEach(el => {
+      el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+      splitWords(el, { n: 0 });
+      revealObserver.observe(el);
+    });
+    document.querySelectorAll('.section-header').forEach(el => revealObserver.observe(el));
+
+    // ----------------------------------------------------
+    // CELULAR DEL HERO: notificaciones que no paran de llegar
+    // ----------------------------------------------------
+    const ICONS = {
+      chat: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+      camera: '<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>',
+      play: '<polygon points="6 3 20 12 6 21 6 3"/>',
+      music: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+      game: '<line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.544-.604-6.584-.685-7.258A4 4 0 0 0 17.32 5z"/>',
+      mail: '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+      missed: '<line x1="22" y1="2" x2="16" y2="8"/><line x1="16" y1="2" x2="22" y2="8"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+      bell: '<path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>'
+    };
+
+    const NOTIFS = [
+      { app: 'WhatsApp', title: 'Los del salón', body: '37 mensajes nuevos', icon: 'chat', color: '#25d366' },
+      { app: 'Instagram', title: '@amigo te etiquetó', body: 'Mira la historia antes de que desaparezca', icon: 'camera', color: '#e1306c' },
+      { app: 'Videos', title: 'Te va a gustar', body: 'Mira esto, solo dura 15 segundos', icon: 'play', color: '#06b6d4' },
+      { app: 'Mensajes', title: 'Mamá', body: '¿Ya vienes? Maneja con cuidado', icon: 'chat', color: '#7b7bff' },
+      { app: 'Música', title: 'Nueva playlist para ti', body: 'Toca para cambiar de canción', icon: 'music', color: '#1db954' },
+      { app: 'Juego', title: '¡Tu racha se acaba!', body: 'Entra hoy para no perderla', icon: 'game', color: '#ffcc00' },
+      { app: 'Teléfono', title: 'Llamada perdida', body: 'Dani te llamó 2 veces', icon: 'missed', color: '#ff3b3b' },
+      { app: 'Correo', title: 'Recordatorio', body: 'Tienes 12 correos sin leer', icon: 'mail', color: '#f4f5f2' },
+      { app: 'Noticias', title: 'Última hora', body: 'Todo el mundo habla de esto', icon: 'bell', color: '#f59e0b' }
+    ];
+
+    const ATTENTION_STEPS = [92, 78, 61, 47, 33, 21, 12, 6];
+
+    const phoneNotifs = document.getElementById('phoneNotifs');
+    const phoneClock = document.getElementById('phoneClock');
+    const phoneStatusTime = document.querySelector('.phone-status-time');
+    const notifCount = document.getElementById('notifCount');
+    const attentionPct = document.getElementById('attentionPct');
+    const attentionFill = document.getElementById('attentionFill');
+
+    function notifElement(i) {
+      const n = NOTIFS[i % NOTIFS.length];
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <div class="notif-card">
+          <span class="notif-icon" style="background:${n.color}"><svg viewBox="0 0 24 24">${ICONS[n.icon]}</svg></span>
+          <span class="notif-text">
+            <span class="notif-app">${n.app} · ahora</span>
+            <span class="notif-title">${n.title}</span>
+            <span class="notif-body">${n.body}</span>
+          </span>
+        </div>`;
+      return li;
+    }
+
+    function setAttention(step) {
+      const pct = ATTENTION_STEPS[Math.min(step, ATTENTION_STEPS.length - 1)];
+      attentionPct.textContent = pct + '%';
+      attentionFill.style.width = pct + '%';
+      const color = pct > 60 ? 'var(--vialys-green)' : pct > 30 ? 'var(--vialys-yellow)' : 'var(--vialys-red)';
+      attentionFill.style.background = color;
+      attentionPct.style.color = color;
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const t = now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0');
+      phoneClock.textContent = t;
+      phoneStatusTime.textContent = t;
+    }
+
+    updateClock();
+    setInterval(updateClock, 15000);
+    [2, 1, 0].forEach(i => phoneNotifs.appendChild(notifElement(i)));
+    setAttention(0);
+
+    if (!reducedMotion) {
+      let notifIndex = 3;
+      let attentionStep = 0;
+      setInterval(() => {
+        if (document.hidden) return;
+        const items = [...phoneNotifs.children];
+        const before = items.map(el => el.getBoundingClientRect().top);
+        const li = notifElement(notifIndex);
+        phoneNotifs.prepend(li);
+        notifCount.textContent = ++notifIndex;
+
+        // Al llegar al mínimo, el ciclo vuelve a empezar como si soltaras el celular
+        attentionStep = attentionStep >= ATTENTION_STEPS.length - 1 ? 0 : attentionStep + 1;
+        setAttention(attentionStep);
+
+        if (window.Motion) {
+          Motion.animate(li, { opacity: [0, 1], y: [-30, 0], scale: [0.92, 1] }, { type: 'spring', stiffness: 380, damping: 30 });
+          // FLIP: las notificaciones anteriores se deslizan hacia abajo
+          items.forEach((el, k) => {
+            const delta = before[k] - el.getBoundingClientRect().top;
+            if (delta) Motion.animate(el, { y: [delta, 0] }, { type: 'spring', stiffness: 380, damping: 30 });
+          });
+        }
+
+        if (phoneNotifs.children.length > 4) {
+          const last = phoneNotifs.lastElementChild;
+          if (window.Motion) {
+            Motion.animate(last, { opacity: 0, scale: 0.9 }, { duration: 0.25 }).then(() => last.remove());
+          } else {
+            last.remove();
+          }
+        }
+      }, 1700);
+    }
+
+    // ----------------------------------------------------
+    // ANIMACIONES CON MOTION (se omiten si el usuario prefiere menos movimiento)
+    // ----------------------------------------------------
+    if (window.Motion && !reducedMotion) {
+      const { animate, inView, stagger } = Motion;
+
+      // Al terminar, limpia los estilos en línea para no bloquear los efectos :hover del CSS
+      const reveal = (els, keyframes, options) => {
+        animate(els, keyframes, options).then(() => {
+          (els instanceof Element ? [els] : els).forEach(el => { el.style.transform = ''; el.style.opacity = ''; });
+        });
+      };
+
+      // Hero
+      reveal(document.querySelectorAll('.hero-content > :not(.kinetic)'), { opacity: [0, 1], y: [28, 0] }, { duration: 0.7, delay: stagger(0.15, { startDelay: 0.1 }), ease: [0.16, 1, 0.3, 1] });
+      animate('.phone-frame', { opacity: [0, 1], y: [60, 0], rotate: [6, 0] }, { duration: 1.1, delay: 0.3, ease: [0.16, 1, 0.3, 1] });
+      animate('.scroll-cue', { opacity: [0, 1] }, { duration: 0.8, delay: 1.2 });
+
+      // Encabezados: número, etiqueta y descripción (el titular ya es cinético)
+      document.querySelectorAll('.section-header').forEach(header => {
+        const index = header.querySelector('.section-index');
+        const rest = header.querySelectorAll('.section-tag, .section-desc');
+        index.style.opacity = 0;
+        rest.forEach(el => { el.style.opacity = 0; });
+        inView(header, () => {
+          reveal(index, { opacity: [0, 1], x: [-40, 0] }, { duration: 0.9, ease: [0.16, 1, 0.3, 1] });
+          reveal(rest, { opacity: [0, 1], y: [16, 0] }, { duration: 0.6, delay: stagger(0.25, { startDelay: 0.1 }), ease: [0.16, 1, 0.3, 1] });
+        }, { amount: 0.3 });
+      });
+
+      // Íconos que se dibujan trazo a trazo
+      document.querySelectorAll('svg.draw').forEach(svg => {
+        svg.querySelectorAll('path, line, polyline, polygon, circle, rect').forEach(p => p.setAttribute('pathLength', '1'));
+        svg.classList.add('draw-ready');
+        inView(svg, () => { setTimeout(() => svg.classList.add('drawn'), 250); }, { amount: 0.8 });
+      });
+
+      // Bloques individuales
+      document.querySelectorAll('.calculator-box, .reaction-challenge-card, .simulator-wrapper, .about-header-flex').forEach(el => {
         el.style.opacity = 0;
         inView(el, () => {
-          animate(el, { opacity: [0, 1], y: [30, 0] }, { duration: 0.6 });
+          reveal(el, { opacity: [0, 1], y: [40, 0] }, { duration: 0.7, ease: [0.16, 1, 0.3, 1] });
         }, { amount: 0.15 });
       });
+
+      // Cuadrículas: los hijos aparecen en cascada
+      document.querySelectorAll('.stats-grid, .distraction-grid, .myths-grid, .about-columns, .footer-grid').forEach(grid => {
+        const items = [...grid.children];
+        items.forEach(el => { el.style.opacity = 0; });
+        inView(grid, () => {
+          reveal(items, { opacity: [0, 1], y: [36, 0], scale: [0.96, 1] }, { duration: 0.6, delay: stagger(0.1), ease: [0.16, 1, 0.3, 1] });
+        }, { amount: 0.15 });
+      });
+
+      // Contadores animados en las estadísticas
+      document.querySelectorAll('.stat-number').forEach(el => {
+        const match = el.textContent.trim().match(/^(\D*)(\d+)(.*)$/);
+        if (!match) return;
+        const [, prefix, target, suffix] = match;
+        inView(el, () => {
+          animate(0, Number(target), {
+            duration: 1.6,
+            ease: [0.16, 1, 0.3, 1],
+            onUpdate: v => { el.textContent = prefix + Math.round(v) + suffix; }
+          });
+        }, { amount: 0.6 });
+      });
+
+      // Resultado de la calculadora: cuenta hasta el nuevo valor y rebota
+      const blindVal = document.getElementById('blindDistanceVal');
+      let shownMeters = parseFloat(blindVal.textContent);
+      let metersAnim = null;
+      document.querySelectorAll('.speed-buttons-grid .chip-btn, .action-buttons-grid .chip-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = parseFloat(blindVal.textContent);
+          if (metersAnim) metersAnim.stop();
+          metersAnim = animate(shownMeters, target, {
+            duration: 0.7,
+            ease: [0.16, 1, 0.3, 1],
+            onUpdate: v => { shownMeters = v; blindVal.textContent = v.toFixed(1) + ' m'; }
+          });
+          animate(blindVal, { scale: [1.18, 1] }, { type: 'spring', stiffness: 400, damping: 14 });
+        });
+      });
+
+      // Credencial: entrada con resorte
+      const pledgeForm = document.getElementById('pledgeForm');
+      pledgeForm.addEventListener('submit', () => {
+        animate('#driverBadge', { opacity: [0, 1], scale: [0.8, 1], rotate: [-4, 0] }, { type: 'spring', stiffness: 260, damping: 16 });
+      });
+
+      // Parallax del celular: baja y gira un poco al hacer scroll por el hero
+      const heroSection = document.getElementById('inicio');
+      const heroPhoneWrap = document.getElementById('heroPhoneWrap');
+      addEventListener('scroll', () => {
+        const progress = Math.min(1, Math.max(0, scrollY / heroSection.offsetHeight));
+        heroPhoneWrap.style.transform = `translateY(${(progress * 120).toFixed(1)}px) rotate(${(progress * 6).toFixed(2)}deg)`;
+      }, { passive: true });
+
+      // Botones magnéticos: siguen levemente al cursor (solo mouse)
+      if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        document.querySelectorAll('.btn-primary, .nav-cta').forEach(btn => {
+          btn.addEventListener('pointermove', e => {
+            const r = btn.getBoundingClientRect();
+            const x = (e.clientX - r.left - r.width / 2) * 0.18;
+            const y = (e.clientY - r.top - r.height / 2) * 0.3;
+            btn.style.translate = `${x.toFixed(1)}px ${y.toFixed(1)}px`;
+          });
+          btn.addEventListener('pointerleave', () => { btn.style.translate = ''; });
+        });
+      }
     }
   </script>
 </body>
